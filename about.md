@@ -1,15 +1,36 @@
 ---
 layout: page
-title: About
+title: 정겨울 (JungWinter)
 permalink: /about/
 ---
 
-Some information about you!
+파이썬 개발자입니다.
 
-### More Information
+### Skill
+#### Python
+- Flask
+- SQLAlchemy
 
-A place to include any other types of information that you'd like to include about yourself.
+#### Processing
+
+#### GIS
+- ArcGIS
+- QGIS
+
+### Project
+#### HongikFood
+[view on Github](https://github.com/JungWinter/HongikFood)
+
+#### HongikSugang
+
+#### Yellowid-Flask
+[view on Github](https://github.com/JungWinter/yellowid-flask)
+
+### Experience
+추가중입니다.
 
 ### Contact me
+밑에 있는 아이콘을 눌러주세요!
 
-[email@domain.com](mailto:email@domain.com)
+메일 : [wintermy201@naver.com](mailto:wintermy201@naver.com)  
+Github : [JungWinter](https://github.com/Jungwinter)
