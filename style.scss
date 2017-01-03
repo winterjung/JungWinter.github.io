@@ -242,8 +242,6 @@ nav {
 //
 
 .posts > .post {
-  font-size: 14px;
-  line-height: 1.5;
   padding-bottom: 2em;
   border-bottom: 1px solid $lightGray;
 }
@@ -254,6 +252,8 @@ nav {
 }
 
 .post {
+  font-size: 14px;
+  line-height: 1.5;
   blockquote {
     margin: 1.8em .8em;
     border-left: 2px solid $gray;
