@@ -9,23 +9,24 @@
   margin: 20px 0 20px 0;
   overflow: scroll;
 }
-
+.highlighter-rouge {
+  padding: 0;
+  padding-top: 0.2em;
+  padding-bottom: 0.2em;
+  margin: 0;
+  font-size: 80%;
+  color: #333;
+  background-color: rgba(0,0,0,0.04);
+  border-radius: 3px;
+}
 code {
   font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
-  // padding: 0;
-  // padding-top: 0.2em;
-  // padding-bottom: 0.2em;
-  // margin: 0;
-  // font-size: 80%;
-  // color: #333;
-  // background-color: rgba(0,0,0,0.04);
-  // border-radius: 3px;
 }
 
-// code::before, code::after{
-//   letter-spacing: -0.2em;
-//   content: "\00a0";
-// }
+.highlighter-rouge::before, .highlighter-rouge::after{
+  letter-spacing: -0.2em;
+  content: "\00a0";
+}
 
 .highlight .c { color: #586E75 } /* Comment */
 .highlight .err { color: #93A1A1 } /* Error */
