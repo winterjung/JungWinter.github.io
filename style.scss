@@ -255,12 +255,15 @@ nav {
   font-size: 14px;
   line-height: 1.5;
   blockquote {
-    margin: 1.8em .8em;
+    margin: .8em .8em;
     border-left: 2px solid $gray;
     padding: 0.1em 1em;
     color: $gray;
-    font-size: 22px;
+    font-size: 14px;
     font-style: italic;
+  }
+  blockquote > p {
+    margin: 10px 0px;
   }
   .entry {
     font-size: 14px;
