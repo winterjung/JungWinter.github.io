@@ -51,6 +51,7 @@ Decimal('0.1000000000000000055511151231257827021181583404541015625')
 ### 대책
 `math.fsum()`, `round()`, `float.as_integer_ratio()`, `math.is_close()` 함수 혹은 다른 방법을 통해서 실수를 방지할 수 있다.
 
+
 #### `math.fsum()`
 `math`모듈의 `fsum(iterable)`를 이용해 두 개 이상의 부동 소수점 합계와 관련된 반올림 오류 누적을 제거하여 정밀도 손실을 방지할 수 있다.  
 [math.fsum 문서](https://docs.python.org/3/library/math.html#math.fsum)  
@@ -70,6 +71,7 @@ Decimal('0.1000000000000000055511151231257827021181583404541015625')
 >>> fsum([0.1, 0.2])
 0.30000000000000004
 ```
+
 
 #### `round()`
 파이썬에서 글로벌 함수로 있는 `round()`를 이용해 반올림 해줌으로써 해결할 수도 있다.
@@ -110,6 +112,7 @@ Context(prec=28, rounding=ROUND_HALF_EVEN, Emin=-999999, Emax=999999, capitals=1
 
 `ROUND_HALF_EVEN` 방식은 짝수에서는 5일 때 내림, 홀수에서는 5일 때는 올림하는 방식이다.  
 다른 방식으로는 
+
 - `ROUND_CEILING`
 - `ROUND_DOWN`
 - `ROUND_FLOOR`
@@ -117,11 +120,14 @@ Context(prec=28, rounding=ROUND_HALF_EVEN, Emin=-999999, Emax=999999, capitals=1
 - `ROUND_HALF_UP`
 - `ROUND_UP`
 - `ROUND_05UP`
+
 들이 있으며 `decimal.getcontext().rounding=ROUND_HALF_UP`처럼 변경할 수 있다.
 [참고 사이트](https://blog.udemy.com/python-round/)
 
+
 #### `float.as_integer_ratio()`
 파이썬 `float`자료형에는 `as_integer_ratio()`함수가 내장되어 있다.
+
 ```python
 >>> x = 3.141592
 >>> x.as_integer_ratio()
@@ -129,12 +135,12 @@ Context(prec=28, rounding=ROUND_HALF_EVEN, Emin=-999999, Emax=999999, capitals=1
 >>> x == 3537118140137533 / 1125899906842624
 True
 ```
+
 연산의 오차보정용 이라기 보다는 원래 값을 손실 없이 다시 만드는 데 유용하다.
 
+
 #### `math.is_close()`
-파이썬 3.5에서 새로 추가된 `math`모듈의 함수다.  
-[math.is_close 문서](https://docs.python.org/3/library/math.html#math.isclose)  
-[PEP 485](https://www.python.org/dev/peps/pep-0485/)  
+파이썬 3.5에서 새로 추가된 `math`모듈의 함수다. [math.is_close 문서](https://docs.python.org/3/library/math.html#math.isclose), [PEP 485](https://www.python.org/dev/peps/pep-0485/)  
 `isclose(a, b, rel_tol=1e-9, abs_tol=0.0)`같은 형태이며  
 `a`와 `b`는 비교할 값들, `rel_tol`은 relative tolerance, `abs_tol`은 absolute tolerance다.  
 실질적으로 위에 나온 방법들보다 제일 간단하고 직관적이다.  
@@ -147,7 +153,7 @@ def isclose(a, b, rel_tol=1e-09, abs_tol=0.0):
 ```
 
 #### 기타
-가장 널리 사용되는 방법으로는 아마 `abs(a - b) <= allowed_error` 가 아닐까 싶다.
+가장 널리 사용되는 방법으로는 아마 `abs(a - b) <= allowed_error` 가 아닐까 싶다.  
 그 외에도 개인만의 노하우가 있다면 PR을 넣어주세요! [링크](https://github.com/JungWinter/JungWinter.github.io)
 
 ### 참고
