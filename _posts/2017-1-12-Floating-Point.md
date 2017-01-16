@@ -107,7 +107,7 @@ True
 ```python
 >>> import decimal
 >>> decimal.getcontext()
-Context(prec=28, rounding=ROUND_HALF_EVEN, Emin=-999999, Emax=999999, capitals=1, clamp=0, flags=[FloatOperation], traps=[InvalidOperation, DivisionByZero, Overflow])
+Context(prec=28, rounding=ROUND_HALF_EVEN, Emin=-999999, Emax=999999, ...)
 ```
 
 `ROUND_HALF_EVEN` 방식은 짝수에서는 5일 때 내림, 홀수에서는 5일 때는 올림하는 방식이다.  
