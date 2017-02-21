@@ -1,0 +1,53 @@
+html {
+  font-size: 100%;
+}
+
+body {
+    background: #fff;
+    font: 18px/1.4 Helvetica, Arial, sans-serif;
+    color: #333;
+}
+
+h1 {
+    font-size: 2em;
+    margin: 0.67em 0;
+    text-align: center;
+}
+
+p {
+    width: 95%;
+    font-size: 80%;
+    text-align: right;
+}
+
+a {
+    color: #4183C4;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+table {
+    width: 90%;
+    margin: 0 auto;
+}
+
+table th {
+    font-weight: bold;
+}
+
+table th,
+table td {
+    font-size: 80%;
+    padding: 3px 6px;
+    border: 1px solid #ddd;
+    text-align: center;
+}
+
+table tr {
+    background-color: #fff;
+    border-top: 1px solid #ccc;
+}
+
+table td:nth-child(2n) {
+    background-color: #f8f8f8;
+}
