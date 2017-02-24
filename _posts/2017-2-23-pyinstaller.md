@@ -23,6 +23,8 @@ pyinstaller의 옵션은 다양하지만 보통 쓰이는 옵션은 몇 개 안�
 - `-w`, `--windowed`: 콘솔 창이 출력되지 않게한다.
 - `-i`, `--icon`: exe파일의 아이콘을 지정한다.
 
+
+
 더불어 PyQt5를 빌드하기 위해서는 PyQt5의 bin폴더를 환경변수에 추가해줘야한다.  
 보통은 PyQt를 설치할 때 자동으로 추가되나 만약 추가되지 않은경우 `lib not found`같은 에러와 함께 PyQt의 여러 dll들을 찾지 못한다는 에러가 난다.  
 추가해야 하는 경로의 예시는 `C:\Python35\Lib\site-packages\PyQt5\Qt\bin`이다.
@@ -35,6 +37,7 @@ pyinstaller의 옵션은 다양하지만 보통 쓰이는 옵션은 몇 개 안�
 
 github issue페이지에서 이 답변이 제일 도움이 되었다.
 
+---
 The following solved the problem for me (on Win10 v1607 - PyQt5 App):  
 
 Add the directory of the required dlls to system Path.  
@@ -49,10 +52,15 @@ Directory if you have Windows SDK:
 `C:\Program Files (x86)\Windows Kits\10\Redist\ucrt\DLLs\x64`  
 
 After you add the required paths, pyinstaller can find the files.
+---
+
+
 
 
 하여튼 나는 PyQt5의 bin폴더와 저 `api-ms-win-core-*.dll`을 한 폴더에 몰아주고 `-p` 옵션으로 폴더를 인식시키고 아래의 명령어를 실행하여 윈도우8.1과 윈도우10에서 동작하는 exe파일을 얻을 수 있었다.  
 `pyinstaller --onefile --windowed --icon=heart.ico --clean -p C:\test main.py`  
+
+
 
 다음 포스팅으로 쓸 내용을 그냥 써보자면  
 `pyinstaller 3.2버전`과 `requests 2.13버전`을 썼을 때 `urllib3`과 `queue`의 `import error`가 나는 문제는 그냥 `requests`라이브러리 버전을 `2.5`로 낮춰 해결했다.
