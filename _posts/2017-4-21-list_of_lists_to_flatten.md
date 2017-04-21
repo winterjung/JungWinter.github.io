@@ -70,9 +70,9 @@ def from_iterable(iterables):
 ```
 원래 컴프리헨션은 가독성을 높이는 기법이라고 생각하는데 이런 2차원 리스트를 1차원 리스트로 만들 때는 별로 가독성이 높아지지 않는 것 같다.  
 
-`[y for x in list_of_lists for y in x]` 이렇게 구문이 주어지면  
-`for x in list_of_lists`구문이 먼저 해석되어 `list_of_lists`의 element들이 각각 x에 들어가게되고 그 다음  
-`[y for y in x]`구문이 해석되어 각각의 x에 들어있는 element들이 y로 조회되고 최종적으로 y로 이루어진 1차원 리스트가 생성된다.
+- `[y for x in list_of_lists for y in x]` 이렇게 구문이 주어지면  
+- `for x in list_of_lists` 구문이 먼저 해석되어 `list_of_lists`의 element들이 각각 x에 들어가게되고  
+- `[y for y in x]` 구문이 해석되어 각각의 x에 들어있는 element들이 y로 조회되고 최종적으로 y로 이루어진 1차원 리스트가 생성된다.
 
 그나마 좀 더 알아보기 쉽게 하자면 `[second for first in list_of_lists for second in first]`정도인데 그게 그거 같다.
 
@@ -84,8 +84,8 @@ def from_iterable(iterables):
 >>> sum(list_of_lists, [])
 [1, 2, 3, 4]
 ```
-본래 `sum()`함수는 [built-in functions 문서](https://docs.python.org/3/library/functions.html#sum)를 참고하면 `sum(iterable[, start])`의 형태를 띄고있고, `start`와 `iterable`의 `items`를 더해 반환하는 함수이다.  
-보통 `sum([1, 2, 3, 4])`같은 형태로 `sum()`을 사용할 때 `iterable`이 `[1, 2, 3, 4]`이고 디폴트로 지정된 `start`의 값은 `0`인 셈이다.
+본래 sum함수는 [built-in functions 문서](https://docs.python.org/3/library/functions.html#sum)를 참고하면 `sum(iterable[, start])`의 형태를 띄고있고, `start`와 `iterable`의 `items`를 더해 반환하는 함수이다.  
+보통 `sum([1, 2, 3, 4])`같은 형태로 sum을 사용할 때 `iterable`이 `[1, 2, 3, 4]`이고 디폴트로 지정된 `start`의 값은 `0`인 셈이다.
 
 `sum([[1, 2], [3, 4]])`같은 식으로 사용하면 2차원 리스트의 원소들인 `[1, 2]`와 `[3, 4]`가 더해져 `[1, 2, 3, 4]`가 되는게 아니냐 할 수 있는데 `start`의 값이 디폴트로 0이기 때문에 저런식으로 그냥 전달해 버리면 `TypeError: unsupported operand type(s) for +: 'int' and 'list'`처럼 int에 list를 더할 수 없다는 `TypeError`가 발생한다.  
 > `start`가 맨 왼쪽에서 더해지는 대상이기 때문에 list에 int를 더할 때 발생하는 `TypeError: can only concatenate list (not "int") to list`에러 메시지가 아닌 것이다.
