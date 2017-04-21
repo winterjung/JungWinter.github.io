@@ -111,3 +111,22 @@ def from_iterable(iterables):
 - `itertools.chain.from_iterable()`
 - 리스트 컴프리헨션
 - `sum()`
+
+```python
+from itertools import chain
+list_of_lists = [[x, 0] for x in range(10000)]
+
+%timeit list(chain(*list_of_lists))
+# 1000 loops, best of 3: 491 µs per loop
+
+%timeit list(chain.from_iterable(list_of_lists))
+# 1000 loops, best of 3: 429 µs per loop
+    
+%timeit [y for x in list_of_lists for y in x]
+# 1000 loops, best of 3: 725 µs per loop
+    
+%timeit sum(list_of_lists, [])
+# 1 loop, best of 3: 211 ms per loop
+```
+결과를 보면 `sum()`함수만 끔찍하게 느리고 나머지 셋은 고만고만함을 알 수 있다.  
+성능과 가독성 중 무엇을 중시하냐의 차이지만 개인적으로 `itertools.chain()` 자체도 가독성이 나쁘다고 볼 수 없기에 `sum()`보다는 `chain()`을 쓰지 않을까 싶다.
