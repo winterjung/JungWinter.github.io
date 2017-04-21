@@ -130,3 +130,29 @@ list_of_lists = [[x, 0] for x in range(10000)]
 ```
 결과를 보면 `sum()`함수만 끔찍하게 느리고 나머지 셋은 고만고만함을 알 수 있다.  
 성능과 가독성 중 무엇을 중시하냐의 차이지만 개인적으로 `itertools.chain()` 자체도 가독성이 나쁘다고 볼 수 없기에 `sum()`보다는 `chain()`을 쓰지 않을까 싶다.
+
+## 덧. Numpy
+외부 라이브러리를 제외하고 표준 라이브러리만 생각하다 보니 `Numpy`를 깜빡했다.  
+`list_of_list`를 ndarray객체로 바꾸어 `reshape()`메서드와 `flatten()`메서드를 실행한 결과를 확인해보자.
+
+```python
+import numpy as np
+list_of_lists = [[x, 0] for x in range(10000)]
+n_lol = np.array(list_of_lists)
+
+%timeit n_lol.reshape(-1)
+# 1000000 loops, best of 3: 768 ns per loop
+
+%timeit n_lol.flatten()
+# 1000000 loops, best of 3: 1 µs per loop
+```
+
+`itertools.chain()`보다 수백배 빠르다는 것을 알 수 있다.
+
+## 결과 비교 그래프
+성능들을 한눈에 알아보기 쉽게 하기 위해 `matplotlib`를 통해 그래프로 시각화 시켜주었다.  
+[그래프를 생성하는 Jupyter 코드](https://github.com/JungWinter/Code_Study/blob/master/Etc/list%20of%20lists%20to%20flatten.ipynb)  
+
+![결과]({{ site.baseurl }}/images/20170421/result.png)  
+log스케일의 그래프임으로 x축에서 1칸의 차이는 실질적으로 10배의 차이다.  
+`Numpy`와 `itertools`의 차이는 약 100배, `Numpy`와 `sum()`의 차이는 **1000배 이상**이다.
