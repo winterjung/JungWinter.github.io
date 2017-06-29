@@ -4,36 +4,12 @@ title: 정겨울 (JungWinter)
 permalink: /about/
 ---
 
-파이썬 개발자입니다.
+<script src="https://use.fontawesome.com/938223e0c9.js"></script>
+<i class="fa fa-mobile" aria-hidden="true"></i> (+82) 10-7504-3262 |
+Project PERSONAL PROJECT
+<i class="fa fa-envelope" aria-hidden="true"></i> wintermy201@gmail.com | <i class="fa fa-home" aria-hidden="true"></i>
+ winterj.me
+| <i class="fa fa-github" aria-hidden="true"></i> JungWinter
 
-### Skill
 
-#### Python
-- Flask
-- SQLAlchemy
-
-#### Processing
-
-#### GIS
-- ArcGIS
-- QGIS
-
-### Project
-
-#### HongikFood
-[view on Github](https://github.com/JungWinter/HongikFood)
-
-#### HongikSugang
-아직 Private입니다.
-
-#### Yellowid-Flask
-[view on Github](https://github.com/JungWinter/yellowid-flask)
-
-### Experience
-추가중입니다.
-
-### Contact me
-밑에 있는 아이콘을 눌러주세요!
-
-메일 : [wintermy201@naver.com](mailto:wintermy201@naver.com)
-Github : [JungWinter](https://github.com/Jungwinter)
+  
