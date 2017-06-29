@@ -12,6 +12,3 @@ permalink: /about/
 <i class="fa fa-github" aria-hidden="true">JungWinter</i>
 
 # [RESUME]({{ site.baseurl }}/project/resume.pdf)
-
-
-  
