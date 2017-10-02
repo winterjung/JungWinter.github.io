@@ -54,3 +54,9 @@ $ more ~/notes.md
 
 - [openblockchains/awesome-blockchains Repo](https://github.com/openblockchains/awesome-blockchains): FAQ가 있는거랑 언어별(지금은 js, py, rb) 기본 구현체가 있다는게 눈에 띈다. 개인적으로 왜 간단한 블록체인 구현체마다 PoW방식만 있지 PoS는 없는지 궁금하다. 내가 만들 수 있다면 만들어서 PR날려야지, 아니면 difficulty 조정 알고리즘이 포함된 PoW를 만들어 날리든지..
 - [How To Code in Python 3 튜토리얼](https://www.digitalocean.com/community/tutorial_series/how-to-code-in-python-3): 영어긴 하지만 이것만 봐도 파이썬 3을 꽤 잘 쓸 수 있을 듯. [`code`모듈을 사용한 디버깅](https://www.digitalocean.com/community/tutorials/how-to-debug-python-with-an-interactive-console)과 [파이썬3의 로깅](https://www.digitalocean.com/community/tutorials/how-to-use-logging-in-python-3) 부분이 잘 되어있다.
+
+## TODO
+1. - [[번역] 자바스크립트에 대한 애정을 언어의 90%를 쓰레기통에 버리면서 다시 발견했던 과정](https://rhostem.github.io/posts/2017-09-how-i-rediscovered-my-love-for-java-script-after-throwing-90-of-it-in-the-trash/)에 있는 레퍼런스 읽기
+2. [A simple Blockchain in Python](https://github.com/dvf/blockchain) 이슈 해결
+3. PoS python 구현
+4. `notes` 커맨드 커스터마이징
