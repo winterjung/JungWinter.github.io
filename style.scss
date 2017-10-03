@@ -262,12 +262,18 @@ nav {
     font-size: 14px;
     font-style: italic;
   }
+
   blockquote > p {
     margin: 10px 0px;
   }
   .entry {
     font-size: 14px;
     line-height: 1.5;
+  }
+
+  .entry > p > img {
+    margin: 0 auto;
+    display: block;
   }
 
   .comments {
