@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Pyinstaller로 PyQt5코드를 exe로 만들기
-tag: python, pyinstaller
+tags: [python, pyinstaller, 파이썬]
 ---
 
 원래 쓰려던 것은 `pyinstaller`로 `requests`라이브러리가 포함된 코드를 빌드할 때 발생하는 에러와 그에 관한 해결 방법을 포스팅하려 했으나, 이는 뒤로 넘기고 먼저 `pyinstaller`를 통해 `PyQt5`라이브러리를 사용한 python코드를 윈도우 exe파일로 만드는 법을 적고자 한다.

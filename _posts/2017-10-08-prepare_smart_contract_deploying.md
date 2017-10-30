@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 스마트 컨트랙트 개발 준비하기 - 개발 과정
-tag: blockchain, smart contract
+tags: [blockchain, smart contract]
 ---
 
 ## 헷갈리는 용어 정리

@@ -2,8 +2,9 @@ title:            WinterJ Blog
 description:      Pythonic Blog
 disqus_shortname: 
 reading_time:     true
-words_per_minute: 200
-url:              https://JungWinter.github.io/jekyll-theme-test
+words_per_minute: 50
+url:              https://winterj.me
+repository:       JungWinter/JungWinter.github.io
 
 # Owner/author information
 owner:
@@ -86,3 +87,4 @@ exclude:
   - package.json
   - spec
   - tmp
+  - bak

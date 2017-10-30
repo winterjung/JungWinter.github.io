@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "[번역] 파이썬 나라의 앨리스"
-tag: python, translation
+tags: [파이썬, python, 번역]
 ---
 
 이 글은 파이썬 프로젝트 패키징에 관한 [Vicki Boykis](https://veekaybee.github.io/)의 [Alice in Python projectland](https://veekaybee.github.io/2017/09/26/python-packaging/)를 번역한 글 입니다. 오역 혹은 그 외 잘못된 부분이 있다면 [트위터](https://twitter.com/res_tin), [메일](mailto:wintermy201@gmail.com), [PR](https://github.com/JungWinter/JungWinter.github.io)로 알려주시면 수정하겠습니다.

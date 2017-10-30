@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 마음찍어둔 문서 읽기 - 03
-tag: article, python, tech
+tags: [article, python, 파이썬, 리뷰]
 ---
 
 ## 트위터 마음함에 있는 아티클 리뷰

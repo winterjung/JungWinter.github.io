@@ -1,12 +1,10 @@
 ---
 layout: post-index
-title: Latest Posts
-description: "Describe this nonsense."
-tags: [Jekyll, theme, themes, responsive, blog, modern]
+title: 정겨울 블로그
+tags: [Jekyll, blog, python]
 comments: false
 image:
-  feature: abstract-1.jpg
-  credit: dargadgetz
+  feature: greenlake.jpg
 ---
 
 {% for post in paginator.posts %}
@@ -30,11 +28,10 @@ image:
     {% endif %}
 
     <div class="entry-content">
-      {{ post.excerpt }}&hellip;
+      {{ post.excerpt }}
     </div><!-- /.entry-content -->
 
-    <p><a href="{{ site.url }}{{ post.url }}">READ MORE</a>
-    </p>
+    <p><a href="{{ site.url }}{{ post.url }}">READ MORE</a></p>
   </div><!-- /.read-more-content -->
 </article><!-- /.hentry -->
 {% endfor %}

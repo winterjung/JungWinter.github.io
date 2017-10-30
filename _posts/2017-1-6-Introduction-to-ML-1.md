@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 머신러닝 입문하기 강의를 듣고 - 1
-tag: 머신러닝, 공부
+tags: [머신러닝, 공부]
 ---
 
 엄태웅 교수님의 [기계학습 (Machine Learning) 입문하기](http://t-robotics.blogspot.kr/2015/10/machine-learning.html)강의를 듣고 필기한 것들을 복습삼아 포스팅한다.

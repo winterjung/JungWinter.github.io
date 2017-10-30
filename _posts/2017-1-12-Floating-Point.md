@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 파이썬에서 부동 소수점 오차 해결하기
-tag: 파이썬
+tags: [파이썬, python, 팁]
 ---
 
 ### 부동 소수점의 문제

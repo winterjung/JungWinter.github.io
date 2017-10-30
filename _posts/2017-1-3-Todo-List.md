@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 2017년 상반기 계획 정리
-tag: 프로젝트, 계획
+tags: [프로젝트, TODO]
 ---
 
 ### 책 읽기

@@ -1,7 +1,7 @@
 ---
 layout: post
 title: ubuntu 16.04에서 iptables설정 save하기
-tag: server, ubuntu
+tags: [server, ubuntu]
 ---
 
 현재 서버의 포트가 외부로 연결된게 두 개 있다.  

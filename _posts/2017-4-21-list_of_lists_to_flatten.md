@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 파이썬에서 2중 리스트를 flatten하게 만들기
-tag: python, trick
+tags: [파이썬, python, 팁]
 ---
 
 우연히 커뮤니티의 프로그래밍 게시판에서 파이썬의 2중 리스트 를 일자화 시키는 것에 대해 보게되었다.  

@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 발표 준비
-tag: python, ml
+tags: [python, 파이썬, 머신러닝, 발표]
 ---
 
 # 제 4회 파이썬 격월 세미나 발표자 모집

@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 맥에서의 jupyter notebook 에러 해결
-tag: python, ml
+tags: [python, jupyter, 파이썬]
 ---
 
 ## 현상

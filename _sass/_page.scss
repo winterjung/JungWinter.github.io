@@ -277,6 +277,10 @@ header .entry-meta {
 		box-shadow: 0 0 0 0, 0 6px 12px rgba(#000,0.1);
 		border-radius: 3px;
 
+		a {
+			color: #4183C4;
+		}
+
 		@media #{$medium} {
 			margin-left: 10px;
 			margin-right: 10px;
