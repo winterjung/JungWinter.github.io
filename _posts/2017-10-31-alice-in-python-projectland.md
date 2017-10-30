@@ -1,6 +1,6 @@
 ---
 layout: post
-title: \[번역\] 파이썬 나라의 앨리스
+title: "[번역] 파이썬 나라의 앨리스"
 tag: python, translation
 ---
 
