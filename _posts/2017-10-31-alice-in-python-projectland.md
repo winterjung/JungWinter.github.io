@@ -1,6 +1,6 @@
 ---
 layout: post
-title: [번역] 파이썬 나라의 앨리스
+title: \[번역\] 파이썬 나라의 앨리스
 tag: python, translation
 ---
 
@@ -8,7 +8,7 @@ tag: python, translation
 
 ![](https://raw.githubusercontent.com/veekaybee/veekaybee.github.io/master/images/alice_cards.jpg)
 
-* TOC
+{:toc}
 
 ## 서문
 Python project structure and packaging standardization is still not a solved problem, something that became even more apparent to me when I recently worked on packaging a machine learning natural language app.
