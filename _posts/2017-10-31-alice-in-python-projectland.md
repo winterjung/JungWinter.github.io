@@ -4,7 +4,7 @@ title: "[번역] 파이썬 나라의 앨리스"
 tags: [파이썬, python, 번역]
 ---
 
-이 글은 파이썬 프로젝트 패키징에 관한 [Vicki Boykis](https://veekaybee.github.io/)의 [Alice in Python projectland](https://veekaybee.github.io/2017/09/26/python-packaging/)를 번역한 글 입니다. 오역 혹은 그 외 잘못된 부분이 있다면 [트위터](https://twitter.com/res_tin), [메일](mailto:wintermy201@gmail.com), [PR](https://github.com/JungWinter/JungWinter.github.io)로 알려주시면 수정하겠습니다.
+이 글은 파이썬 프로젝트 패키징에 관한 [Vicki Boykis](https://veekaybee.github.io/)의 [Alice in Python projectland](https://veekaybee.github.io/2017/09/26/python-packaging/)를 번역한 글입니다. 오역 혹은 그 외 잘못된 부분이 있다면 역자의 [트위터](https://twitter.com/res_tin), [메일](mailto:wintermy201@gmail.com), [PR](https://github.com/JungWinter/JungWinter.github.io)로 알려주시면 수정하겠습니다. 모든 저작권과 권리는 원작자인 [Vicki Boykis](https://veekaybee.github.io/)에게 있습니다.
 
 ![](https://raw.githubusercontent.com/veekaybee/veekaybee.github.io/master/images/alice_cards.jpg)
 
@@ -12,32 +12,44 @@ tags: [파이썬, python, 번역]
 
 ## 서문
 Python project structure and packaging standardization is still not a solved problem, something that became even more apparent to me when I recently worked on packaging a machine learning natural language app.
+파이썬 프로젝트 구조와 패키징 표준화는 아직 해결되지 않은 문제다. 이는 최근에 내가 기계학습 자연어 응용 프로그램을 패키징할 때 더욱 분명해졌다.
+
+In the JVM, as long as you have your path structured correctly, build tools will understand it and create a package for you into an executable JAR.
+JVM에서 [경로가 올바르게 구조화 되어 있다면](https://maven.apache.org/guides/introduction/introduction-to-the-standard-directory-layout.html), 빌드 도구는 이를 이해하고 실행 가능한 JAR로 패키지를 생성한다.
+
+But, when I started looking for the same standardization in Python, it wasn’t as straightforward. Some questions I had as I worked: Should I be using virtualenvs? Pipenvs? Setuptools? Should I have a setup.cfg? What are wheels, or eggs, for that matter? Does each folder need an __init__.py? What does that file even do? How do I reference modules along the same PYTHONPATH?
+그러나 파이썬에서 동일한 표준화를 찾기 시작했을 때, 그다지 간단하지 않았다. `virtualenv`, `pipenv`, `setuptools`를 사용해야 하나? `setup.cfg`가 있어야하나? `wheel`이랑 `egg`는 또 뭐고? 각 폴더에 `__init__.py`가 있어야 하나? 그 파일은 대체 뭐야? 동일한 `PYTHONPATH`에서 모듈을 어떻게 참조하지? 같은 여러 의문들이 들었다.
+
+It became apparent that Python’s flexbility, which I really appreciate when I’m buckled down and writing code, makes it a huge pain to operationalize.
+내가 코드를 작성할 때 정말 고맙게 생각하는 파이썬의 유연성이 운영에 큰 고통을 준다는게 분명해졌다.
+
+
+As I worked, I thought I’d write down everything I learned and built up to a complete Python project, from first principles, through a simple example, and thought it might help other people working through the same issues, as well.
+첫 번째 원칙으로부터 간단한 예제를 통해 완전한 파이썬 프로젝트를 만들면서 배웠던 모든 것을 적었고, 같은 문제를 겪는 사람들에게 도움이 될 것 이라고 생각한다.
+
+
+Come with me on a voyage of magic, adventure, and really annoying relative path references to find out how and why Python packaging works the way it does.
+파이썬 패키지가 어떻게 그리고 왜 그렇게 작동하는지 찾기 위한 마법과 모험 그리고 정말 성가신 상대 경로 참조의 모험을 함께하자.
+
+This post goes through:
+이 글은 아래의 순서로 이루어져있다.
 
 ![](https://raw.githubusercontent.com/veekaybee/veekaybee.github.io/master/images/package_flow.png)
+
+To comfortably go through the content, you should be reasonably comfortable with Python (aka if you know what a list comprehension is and how it works you should probably be good), and have some understanding of object-oriented programming basics.
+이 글을 잘 이해하기 위해선 파이썬에 익숙해야하고([리스트 컴프리헨션](http://effbot.org/zone/python-list.htm)이 무엇인지 알고 어떻게 동작하는지 안다면 더 좋다), 객체 지향 프로그래밍 기초에 대한 이해가 있어야한다.
+
+All of the code is here.
+모든 코드는 [여기](https://github.com/veekaybee/textedit/tree/master/textedit)에 있다.
+
+My hope is that this post becomes a living document, so if you see something egregiously wrong, or something I missed, feel free to submit a pull request.
+이 글이 살아있는 글이 되길 원하므로 뭔가 심각하게 잘못되거나 내가 놓친 부분을 발견한다면 [PR](https://github.com/veekaybee/textedit/pulls)을 보내주길 바란다.
 
 ## Python hides the hurt
 I’m going to start this Python post with a little Java. Sorry in advance.
 
 ```java
-import java.io.*;
 
-public class Replace {
-
-    public static void main(String[] args) throws IOException {
-        File file = new File("alice.txt");
-
-        try (FileReader freader = new FileReader(file);
-             BufferedReader reader = new BufferedReader(freader);
-             FileWriter writer = new FileWriter("new_alice.txt")) {
-            String line;
-
-            while ((line = reader.readLine()) != null) {
-                String newLine = line.replaceAll("\\s+$", "").replaceAll("Alice", "Vicki");
-                writer.write(newLine);
-            }
-        }
-    }
-}
 ```
 
 ```python
