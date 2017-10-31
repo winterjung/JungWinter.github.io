@@ -13,10 +13,11 @@ $front-page-feature-image-height : 400px; // min 150px recommended
    Typography
    ========================================================================== */
 
-$base-font                       : 'Lato', Calibri, Arial, sans-serif;
+// $base-font                       : 'Lato', Calibri, Arial, sans-serif;
+$base-font                       : 'Apple SD Gothic Neo', 'Segoe UI', 'Malgun Gothic', 'Helvetica Neue', 'Trebucket MS', 'Tahoma', 'Arial', 'Gulim', sans-serif;
 $heading-font                    : $base-font;
 $caption-font                    : $base-font;
-$code-font                       : consolas;
+$code-font                       : 'Consolas', monospace;
 $alt-font                        : serif;
 
 $doc-font-size                   : 16;
