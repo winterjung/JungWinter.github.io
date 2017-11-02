@@ -87,9 +87,9 @@ public class Replace {
         File file = new File("alice.txt");
 
         try {
-						FileReader freader = new FileReader(file);
-			      BufferedReader reader = new BufferedReader(freader);
-			      FileWriter writer = new FileWriter("new_alice.txt")
+            FileReader freader = new FileReader(file);
+            BufferedReader reader = new BufferedReader(freader);
+            FileWriter writer = new FileWriter("new_alice.txt")
             String line;
 
             while ((line = reader.readLine()) != null) {
