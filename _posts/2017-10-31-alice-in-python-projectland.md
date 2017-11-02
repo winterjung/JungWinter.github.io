@@ -136,10 +136,24 @@ To understand what Python abstracts away and why this leads to different archite
 
 파이썬이 추상화하는 것과 왜 다른 아키텍처를 가지게 됐는지 이해하기 위해 `처음`부터 시작해보자.
 
-## 간단한 단어 처리기 만들기
+## 간단한 워드 프로세서 만들기
 ![](https://raw.githubusercontent.com/veekaybee/veekaybee.github.io/master/images/rabbit.jpg)
 
-## Creating a single object
+Let’s say I am Lewis Carroll, and I’m writing Alice in Wonderland. But instead of using ink and paper, I’d like to use some 21st century technology.
+
+내가 이상한 나라의 앨리스를 쓰고 있는 루이스 캐롤이라 하자. 그러나 잉크와 종이 대신 21세기 기술을 사용하려 한다.
+
+
+What kinds of stuff do authors usually like to do to books, that can be easily automated with a program? Fixing spacing after a period from single to double, spellcheck, replacing words in entire texts, and word count are some common text editing tasks. Authors like word editors.
+
+저자가 책을 쓰면서 자주 하는 일 중에 프로그램을 이용해 쉽게 자동화할 수 있는 것이 무엇이 있을까? 마침표 뒤에 공백 넣기, 맞춤법 검사, 글자 바꾸기, 글자 수 세기가 빈번하기 때문에 저자는 워드 프로세서를 애용한다.
+
+
+We’re going to create a really, really (really) simple version of Word to demonstrate how Python packaging works, drilling down through internals and hopefully having some fun along the way.
+
+우리는 이제 [정말 정말 단순한(정말로) Word](https://github.com/veekaybee/textedit)를 만들면서 파이썬 패키징이 어떻게 작동하는지 내부적으로 파헤칠 것 이다. 부디 즐겁기 바란다.
+
+## Creating a single object 단일 객체 만들기
 ![](https://raw.githubusercontent.com/veekaybee/veekaybee.github.io/master/images/alice_door.gif)
 
 ![](https://raw.githubusercontent.com/veekaybee/veekaybee.github.io/master/images/model.png)
