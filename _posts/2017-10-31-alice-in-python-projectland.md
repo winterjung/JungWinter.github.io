@@ -134,7 +134,7 @@ But, since Python abstracts types, objects, and paths away from the user, and th
 
 To understand what Python abstracts away and why this leads to different architecture choices, let’s start at The Beginning.
 
-파이썬이 추상화하는 것과 왜 다른 아키텍처를 가지게 됐는지 이해하기 위해 `처음`부터 시작해보자.
+파이썬이 무엇을 추상화하는지, 왜 다른 아키텍처를 가지게 됐는지 이해하기 위해 `처음`부터 시작해보자.
 
 ## 간단한 워드 프로세서 만들기
 ![](https://raw.githubusercontent.com/veekaybee/veekaybee.github.io/master/images/rabbit.jpg)
@@ -151,14 +151,47 @@ What kinds of stuff do authors usually like to do to books, that can be easily a
 
 We’re going to create a really, really (really) simple version of Word to demonstrate how Python packaging works, drilling down through internals and hopefully having some fun along the way.
 
-우리는 이제 [정말 정말 단순한(정말로) Word](https://github.com/veekaybee/textedit)를 만들면서 파이썬 패키징이 어떻게 작동하는지 내부적으로 파헤칠 것 이다. 부디 즐겁기 바란다.
+우리는 이제 [정말 정말 단순한(정말로) Word](https://github.com/veekaybee/textedit)를 만들면서 파이썬 패키징이 어떻게 작동하는지 내부적으로 파헤치려 한다. 부디 즐겁기 바란다.
 
 ## Creating a single object 단일 객체 만들기
 ![](https://raw.githubusercontent.com/veekaybee/veekaybee.github.io/master/images/alice_door.gif)
 
+To start writing Python code, I’ll start in the Python REPL, the safe space for testing small pieces of code.
+
+파이썬 코드를 작성하기 위해, 작은 코드 조각들을 안전하게 테스트 할 수 있는 파이썬 REPL을 사용한다.
+
+
+I might write something like,
+
+그리고 아래의 코드를 작성해보자.
+
+`x = "Alice"`
+
+This is a variable, and also, a complete piece of Python code. It looks deceptively simple - a string. But it’s really also an object, because everything, even primitive data types, is an object.
+
+이것은 변수이면서 동시에 완전한 파이썬 코드 조각이다. 얼핏 보면 단순한 문자열이다. 그러나 실제로는 객체기도 하다. 이는 문자열뿐만 아니라 모든 것, 심지어 자료형 마저도 객체다.
+
+
+Objects are the building blocks of Python. You can create multiple objects that you bundle into a single executable file, known as a module. You can bundle several modules into a package. It gets a little more complicated when you also understand that packages and modules are also objects, but let’s keep it pretty simple here.
+
+객체는 파이썬의 기본 요소다. 모듈이라는 파일에 여러 객체를 넣어 묶을 수 있다. 또 여러 모듈을 패키지로 묶을 수 있다. 패키지와 모듈 또한 객체라는 사실을 알게되면 조금 더 복잡해지겠지만 여기서는 간단하게 설명하겠다.
+
 ![](https://raw.githubusercontent.com/veekaybee/veekaybee.github.io/master/images/model.png)
 
+Once we have our object, x, we can find out what’s going on under the covers.
+
+`x`라는 객체가 생기면, 우리는 내부적으로 무슨일이 일어나는지 알 수 있다.
+
+
+Each Python object has an identity - a pointer to a memory address where the object is stored, a type, and a value. All of this is metadata about the object and will help us investigate how various items in Python interact with each other.
+
+[파이썬 객체](https://docs.python.org/3/reference/datamodel.html)는 객체가 저장된 메모리 주소를 가리키는 포인터, 자료형, 값을 가진다. 이들은 객체에 대한 메타 정보이며 파이썬에서 다양한 구성요소들이 서로 어떻게 상호작용하는지 조사하는 데 도움이 될 것이다.
+
 ![](https://raw.githubusercontent.com/veekaybee/veekaybee.github.io/master/images/object_props.png)
+
+In Java, we can explicitly see as we build the code what the variable looks like - what type it is, what its class is, and where it fits into a program, because Java mandates that you write all of this out.
+
+자바에서는 모든 것을 작성해야만 하므로 코드를 작성하며 변수의 자료형이 무엇인지, 클래스는 무엇인지, 어느 프로그램에 있는지 명시적으로 볼 수 있다.
 
 ```java
 public class Alice {
@@ -170,10 +203,23 @@ public class Alice {
 }
 ```
 
+In Python, we have to dig a little to find that information. First, we can find out the memory address of the object:
+
+파이썬에서 그 정보를 찾기 위해서는 조금 파헤쳐야한다. 먼저 우리는 객체의 메모리 주소를 찾을 수 있다.
+
 ```python
 >>> id(x)
 4409066472
 ```
+
+Then, we can look at the type of a single Python object by calling type() on it.
+
+그런 다음 `type()`을 호출함으로써 객체의 자료형을 볼 수 있다.
+
+
+You can see that it’s an instance of class string. And, further, you can see that string is a class, too, type.
+
+그러면 `x`가 `str`이라는 문자열 클래스의 인스턴스임을 볼 수 있고, `str` 또한 `type` 클래스의 인스턴스임을 볼 수 있다.
 
 ```python
 >>> x = "Alice"
@@ -183,10 +229,64 @@ public class Alice {
 <class 'type'>
 ```
 
+It’s classes and objects all the way down. We can also find out more about the string object with the __doc__ method.
+
+모든 것이 클래스와 객체다. 또 `__doc__`로 `str` 객체에 대해 더 많이 알 수 있다.
+
 ```python
 >>> x.__doc__
 "str(object='') -> str\nstr(bytes_or_buffer[, encoding[, errors]]) -> str\n\nCreate a new string object from the given object. If encoding or\nerrors is specified, then the object must expose a data buffer\nthat will be decoded using the given encoding and error handler.\nOtherwise, returns the result of object.__str__() (if defined)\nor repr(object).\nencoding defaults to sys.getdefaultencoding().\nerrors defaults to 'strict'."
 ```
+
+(If you’re more curious about how strings specifically are created, digging into the Python source code is fun, which is where the __doc__ string comes from.)
+
+(문자열이 구체적으로 어떻게 생성되는지 , `__doc__` 문자열이 어디서 오는지 궁금하다면 [파이썬 소스 코드](https://github.com/python/cpython/blob/2.7/Objects/stringobject.c)를 파헤쳐보는 게 재밌을 것이다.)
+
+
+And if we call `dir()`, we can see all of the object attributes and methods that can act on that class. Attributes are variables and methods created specifically by higher-level Python classes. Methods are specific to that object. For example, most Python objects have the `__add__`, `__dir__`, and `__setattr__` attributes. Only strings have `join`, `strip`, and `replace`
+
+`dir()`을 호출하면, 그 클래스에서 작동하는 모든 객체 속성과 메소드를 볼 수 있다. 이들은 더 추상화된 파이썬 클래스에 의해 만들어지기도 하고, 특정 객체에만 있는 메소드도 있다. 예를 들어 `__add__`, `__dir__`, `__setattr__`는 대부분의 파이썬 객체가 가지고 있는 속성이고, `join`, `strip`, `replace` 는 오직 문자열만 가지고 있다.
+
+
+```python
+>>> dir(x)
+['__add__', '__class__', '__contains__', '__delattr__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__getitem__', '__getnewargs__', '__gt__', '__hash__', '', '__iter__', '__le__', '__len__', '__lt__', '__mod__', '__mul__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__rmod__', '__rmul__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', 'capitalize', 'casefold', 'center', 'count', 'encode', 'endswith', 'expandtabs', 'find', 'format', 'format_map', 'index', 'isalnum', 'isalpha', 'isdecimal', 'isdigit', 'isidentifier', 'islower', 'isnumeric', 'isprintable', 'isspace', 'istitle', 'isupper', 'join', 'ljust', 'lower', 'lstrip', 'maketrans', 'partition', 'replace', 'rfind', 'rindex', 'rjust', 'rpartition', 'rsplit', 'rstrip', 'split', 'splitlines', 'startswith', 'strip', 'swapcase', 'title', 'translate', 'upper', 'zfill']
+>>> x.__init__
+<method-wrapper '__init__' of str object at 0x105ec4d88>
+```
+
+You can check this by creating an int:
+
+이는 `int` 를 만들어서 확인해볼 수 있다.
+
+```python
+>>> y = 9
+>>> dir(y)
+['__abs__', '__add__', '__and__', '__bool__', '__ceil__', '__class__', '__delattr__', '__dir__', '__divmod__', '__doc__', '__eq__', '__float__', '__floor__', '__floordiv__', '__format__', '__ge__', '__getattribute__', '__getnewargs__', '__gt__', '__hash__', '__index__', '__init__', '__int__', '__invert__', '__le__', '__lshift__', '__lt__', '__mod__', '__mul__', '__ne__', '__neg__', '__new__', '__or__', '__pos__', '__pow__', '__radd__', '__rand__', '__rdivmod__', '__reduce__', '__reduce_ex__', '__repr__', '__rfloordiv__', '__rlshift__', '__rmod__', '__rmul__', '__ror__', '__round__', '__rpow__', '__rrshift__', '__rshift__', '__rsub__', '__rtruediv__', '__rxor__', '__setattr__', '__sizeof__', '__str__', '__sub__', '__subclasshook__', '__truediv__', '__trunc__', '__xor__', 'bit_length', 'conjugate', 'denominator', 'from_bytes', 'imag', 'numerator', 'real', 'to_bytes']
+```
+
+Finally, the object’s value. Since we’re working in the Python REPL, x is a global variable, i.e. available to the entire Python namespace. Therefore, we should be able to see it:
+
+마지막으로 [객체의 값](https://stackoverflow.com/questions/12693606/reason-for-globals-in-python)이다. 지금 우리는 파이썬 REPL에서 작업하고 있기에 `x` 는 글로벌 변수고, 이는 즉 전체 파이썬 네임 스페이스에서 사용가능 하다는 뜻이다. 아래와 같이 확인해볼 수 있다.
+
+```python
+>>> globals()
+{'__loader__': <class '_frozen_importlib.BuiltinImporter'>, 'x': 'Alice', '__spec__': None, 'y': 9, '__name__': '__main__', '__doc__': None, '__builtins__': <module 'builtins' (built-in)>, '__package__': None}
+```
+
+We can run `globals` specifically on it to get its value:
+
+`x`의 값을 얻기 위해 `globals`를 사용할 수도 있다.
+
+```python
+>>> globals()['x']
+'Alice'
+```
+
+Now that we know what a single object can look like, let’s get out of the shallows of the REPL and create a bunch of them to interact with each other.
+
+이제 하나의 객체가 어떻게 구성되어있는지 알았으므로, 얄팍한 REPL에서 벗어나 서로 얽히게끔 가지를 뻗어보자.
+
 ## Combining objects into a program
 ![](https://raw.githubusercontent.com/veekaybee/veekaybee.github.io/master/images/tea_mouse.jpg)
 
