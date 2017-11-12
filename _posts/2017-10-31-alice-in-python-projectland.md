@@ -8,11 +8,11 @@ tags: [파이썬, python, 번역]
 
 ![](https://raw.githubusercontent.com/veekaybee/veekaybee.github.io/master/images/alice_cards.jpg)
 
-- [Intro](#intro)
-- [Python hides the hurt](#python-hides-the-hurt)
-- [Building a simple word processor](#building-a-simple-word-processor)
-- [Creating a single object](#creating-a-single-object)
-- [Combining objects into a program](#combining-objects-into-a-program)
+- [서문](#intro)
+- [파이썬의 숨겨진 상처](#python-hides-the-hurt)
+- [간단한 워드 프로세서 만들기](#building-a-simple-word-processor)
+- [단일 객체 만들기](#creating-a-single-object)
+- [객체를 프로그램에 결합하기](#combining-objects-into-a-program)
   - [Refactoring a single program](#refactoring-a-single-program)
 - [Combining programs into scripts](#combining-programs-into-scripts)
 - [Combining scripts into a module](#combining-scripts-into-a-module)
@@ -36,7 +36,6 @@ tags: [파이썬, python, 번역]
   - [Wheels](#wheels)
   - [PyPi](#pypi)
 - [Conclusion](#conclusion)
-- [Acknowledgements](#acknowledgements)
 
 ## <a id="intro"></a>서문
 파이썬 프로젝트 구조와 패키징 표준화는 아직 문제가 많다. 이는 최근에 내가 기계학습된 자연어 처리 앱을 패키징할 때 더욱 크게 느껴졌다.
@@ -265,8 +264,10 @@ mbp-vboykis:python_packaging vboykis$ tree
 ```
 파일을 커맨드라인으로 실행시키면 아래와 같이 출력된다. 
 
-`vboykis$ python wordcount.py
-Word Count: 274`
+```bash
+vboykis$ python wordcount.py
+Word Count: 274
+```
 
 `wordcount.py`의 내용은 아래와 같다.
 
@@ -342,11 +343,9 @@ Word count: 274
 
 ```
 
-How do we get that file elsewhere? For example, how do we import functions from wordcount if we're in the REPL?  The REPL is, essentially, a special case of a file being executed directly in our current working directory.
-
 이 파일을 다른 곳에서 어떻게 불러올까? 예를 들어 REPL에서 `wordcount`의 함수를 어떻게 가져올 수 있을까? 일단 REPL은 근본적으로 현재 작업 폴더에서 실시간으로 실행되고 있는 파일이라는 특별한 경우다.
 
-그러나 REPL에서 `wordcount.py`를 실행하고 싶다면 `wordcount` 모듈을 다른 파일에서 가져오기 때문에 `__name__`은 해당 모듈의 이름이 된다.
+REPL에서 `wordcount.py`를 실행하고 싶다면 `wordcount` 모듈을 다른 파일에서 가져오기 때문에 `__name__`은 해당 모듈의 이름이 된다.
 
 ```python
 >>> import wordcount
