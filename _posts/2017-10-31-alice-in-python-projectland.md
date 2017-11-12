@@ -131,7 +131,7 @@ with open('alice.txt', 'r') as input:
 ## <a id="building-a-simple-word-processor"></a>간단한 워드 프로세서 만들기
 ![](https://raw.githubusercontent.com/veekaybee/veekaybee.github.io/master/images/rabbit.jpg)
 
-내가 _이상한 나라의 앨리스_를 쓰고 있는 루이스 캐롤이라 하자. 그러나 잉크와 종이 대신 21세기 기술을 사용하려 한다.
+내가 *이상한 나라의 앨리스*를 쓰고 있는 루이스 캐롤이라 하자. 그러나 잉크와 종이 대신 21세기 기술을 사용하려 한다.
 
 
 작가가 책을 쓰면서 자주 하는 일 중에 프로그램을 이용해 쉽게 자동화할 수 있는 것이 무엇이 있을까? 보통 마침표 뒤에 공백 넣기, 맞춤법 검사, 글자 바꾸기, 글자 수 세기같은 작업이 빈번하기 때문에 작가는 워드 프로세서를 애용한다.
@@ -239,15 +239,15 @@ public class Alice {
 
 이제 하나의 객체가 어떻게 구성되어있는지 알았으므로, 얄팍한 REPL에서 벗어나 이 객체들이 서로 얽히게끔 가지를 뻗어보자.
 
-## <a id="combining-objects-into-a-program"></a> Combining objects into a program
+## <a id="combining-objects-into-a-program"></a> 객체를 프로그램에 결합하기
 
 
 ![tea_muse](https://raw.githubusercontent.com/veekaybee/veekaybee.github.io/master/images/tea_mouse.jpg)
 
 
-Usually, after we write a couple one-liners, we want to write a complete snippet of code that does something. For example, let's say Lewis Carroll has written a couple pages and wants to do a word count on the file he's written (writers always want to compulsively do word counts).
+한줄 한줄 코드를 실행시켜 보고나면 보통 어떤 일을 하는 완전한 코드 조각을 작성하고 싶기 마련이다. 그러기 위해 루이스 캐롤이 본인이 쓴 원고에 있는 단어 수를 세고싶다고 해보자. (작가는 항상 단어 수에 매달린다.)
 
-We'll work with `alice.txt` here: 
+루이스 캐롤이 쓴 `alice.txt`를 보자.
 
 ```
 Alice was beginning to get very tired of sitting by her sister on the bank, and of having nothing to do: once or twice she had peeped into the book her sister was reading, but it had no pictures or conversations in it, ‘and what is the use of a book,’ thought Alice ‘without pictures or conversations?’
@@ -256,30 +256,27 @@ There was nothing so very remarkable in that; nor did Alice think it so very muc
 In another moment down went Alice after it, never once considering how in the world she was to get out again.
 ```
 
-We are now working with a file, `wordcount.py`, and a text file, in the same directory. 
+이제 `wordcount.py` 파일을 위의 `alice.txt` 파일과 같은 폴더에 만들자.
 
 ```bash
 mbp-vboykis:python_packaging vboykis$ tree
 ├── alice.txt
 └── wordcount.py
 ```
-The loop is still a single logical piece of code. Let's save this as a file and execute it on the command line:  
+파일을 커맨드라인으로 실행시키면 아래와 같이 출력된다. 
 
 `vboykis$ python wordcount.py
 Word Count: 274`
 
-Let's take a look inside: 
+`wordcount.py`의 내용은 아래와 같다.
 
 ```python
 with open('alice.txt', 'r') as file:
 	file_contents = file.read()
 	print('Word count:', len(file_contents.split()))
-		
----
-Word count: 274
 ```
 
-We still have objects that we are performing operations on. `file` is an object, as is `file_contents` and `len(file_contents.split())`, but now we're getting more interesting types: 
+작업을 수행했던 객체인 `file`, `file_contents`, `len(file_contents.split())`이 있고, 이들의 타입을 확인해보자.
 
 ```python
 type(file_contents)
@@ -292,22 +289,22 @@ type(len(file_contents.split()))
 int
 ```
 
-When we run `python wordcount.py`, a [couple things happen](https://tech.blog.aknin.name/2010/04/02/pythons-innards-introduction/): 
+우리가 `python wordcount.py` 명령어를 실행시킬 때 [여러 일이 일어난다.](https://tech.blog.aknin.name/2010/04/02/pythons-innards-introduction/)
 
-1) Python parses command line arguments (everything after `python` on the CLI)
+1) 명령어 인수를 파싱한다. (커맨드라인에서 `python` 뒤에 있는 것들)
 
-2) Python checks for any dependencies (aka `import` statements) and pulls them in. 
+2) 의존성을 검사하고 가져온다. (`import` 구문으로 적어준 것들)
 
-3) Python looks in our current working directory (`python_packaging`) for anything related to the file, and uses the path setup from when Python was installed on your system. 
+3) 현재 폴더(여기선 `python_packaging`)에서 파일과 관련된 모든 것을 찾고, 파이썬을 설치할 때 설정했던 `path`를 사용한다.
 
-Let's check what our `PYTHONPATH` is:
+`PYTHONPATH`는 다음과 같이 확인해볼 수 있다.
 
 ```python
 >>> import os
->>> os.getcwd() #where we're currently running code
+>>> os.getcwd() # 코드를 실행시키고 있는 현재 위치
 '/python_packaging'
 
->>> print('\n'.join(sys.path)) # all the paths Python checks for packages
+>>> print('\n'.join(sys.path)) # 파이썬이 패키지를 확인해보는 모든 경로
 
 python3/3.5.1/Frameworks/
 
@@ -324,11 +321,9 @@ Python.framework/Versions/3.5/lib/python3.5/lib-dynload
 /usr/local/lib/python3.5/site-packages
 ```
 
-4) Python assembles a Python virtual machine, [CPython](https://en.wikipedia.org/wiki/CPython), to execute and interpret the code. 
+4) 파이썬 가상 머신인 [CPython](https://en.wikipedia.org/wiki/CPython)으로 코드를 해석하고 실행시킨다.
 
-5) If there are no external dependencies (aka packages), as is the case in our word count program, a special attribute, ``__name__`` is initialized to ``"__main__"`` in the __main__ [namespace](https://docs.python.org/3/library/__main__.html). 
-
-Program: 
+5) 우리의 `단어 수 세기 프로그램`처럼 외부 패키지가 없다면, `__name__` 이라는 특수한 속성은 [메인 네임스페이스](https://docs.python.org/3/library/__main__.html)에서 `"__main__"`으로 초기화된다.
 
 ```python
 print("__name__:", __name__)
@@ -337,7 +332,8 @@ with open('texts/alice.txt', 'r') as file:
 	file_contents = file.read()
 	print('Word count:', len(file_contents.split()))
 ```
-Output:
+
+위 코드를 실행시켜보면 다음과 같은 결과가 나온다.
  
 ```bash
 mbp-vboykis:python_packaging vboykis$ python wordcount.py 
@@ -348,7 +344,9 @@ Word count: 274
 
 How do we get that file elsewhere? For example, how do we import functions from wordcount if we're in the REPL?  The REPL is, essentially, a special case of a file being executed directly in our current working directory.
 
-However, if we run `wordcount.py` form the REPL, since we're importing the `wordcount` module from elsewhere, the name immediately becomes that module. 
+이 파일을 다른 곳에서 어떻게 불러올까? 예를 들어 REPL에서 `wordcount`의 함수를 어떻게 가져올 수 있을까? 일단 REPL은 근본적으로 현재 작업 폴더에서 실시간으로 실행되고 있는 파일이라는 특별한 경우다.
+
+그러나 REPL에서 `wordcount.py`를 실행하고 싶다면 `wordcount` 모듈을 다른 파일에서 가져오기 때문에 `__name__`은 해당 모듈의 이름이 된다.
 
 ```python
 >>> import wordcount
@@ -356,14 +354,13 @@ However, if we run `wordcount.py` form the REPL, since we're importing the `word
 'wordcount'
 ```
 
-6) All of the code gets translated at run-time to byte code using the CPython interpreter. Python 
-generates a copy of the file with the `.pyc` extension in a folder called `__pycache__`.
+6) 모든 코드는 런타임시 `CPython` 인터프리터를 통해 바이트 코드로 변환된다. 파이썬은 `__pycache__` 폴더에 `.pyc` 파일로 바이트 코드의 사본을 생성한다.
 
-If you want to see what the byte code of our program looks like, [digging into it](http://akaptur.com/blog/2013/08/14/python-bytecode-fun-with-dis/) can be fun.
+우리 프로그램의 바이트 코드가 궁금하다면 [이 글](http://akaptur.com/blog/2013/08/14/python-bytecode-fun-with-dis/)을 참고해 더 파고 들어가도 재밌을 것이다.
 
-7) As the code is executed, Python reads all of our objects and loops. The interpreter allocates memory to the code and the special Python structures for each object are created. This is where the `id` for each object is created, and why we can call these things after we run the code. 
- 
-We've just created a Python runtime environment, told Python which directories it should be reading from, imported some stuff, allocated memory, and given some output. Basically all of the things we do to run a program. 
+7) 코드가 실행될 때 파이썬은 모든 객체와 루틴을 읽어들인다. 인터프리터는 각 객체가 생성될 때마다 특별한 파이썬 구조체에 메모리를 할당한다. 이 때 각 객체의 `id`가 만들어지고, 코드를 실행한 후 객체를 호출할 수 있게된다.
+
+이제 파이썬 런타임 환경이 만들어졌다. 폴더를 읽고, 모듈을 가져오고, 메모리를 할당하고, 출력하는 과정이 프로그램을 실행하는데 가장 기본이다.
  
 ### <a id="refactoring-a-single-program"></a>Refactoring a single program 
 
