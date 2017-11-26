@@ -4,6 +4,7 @@ title: 파이썬으로 스마트 컨트랙트 개발하기
 tags: [blockchain, smart contract, python]
 ---
 
+## 어떤 글인가
 11월 21일 화요일, 블록체인 스터디에서 [web3.py](https://github.com/pipermerriam/web3.py)를 이용한 스마트 컨트랙트 배포와 활용에 대해 발표했다. 본래는 PDF파일을 블록체인에 올린 원본 증명 서비스의 간단한 개념 증명을 구현하려 했지만, 초기 계획보다 작업을 많이 하지 못해 2주에 걸쳐 작업하기로 결정했다. 이 글을 통해 **이더리움 노드를 설치해 구동시키고 파이썬을 사용해 스마트 컨트랙트를 컴파일 한 후 배포하기까지의 과정** 과 그러면서 있었던 **여러 문제 상황들을 어떻게 해결했는지** 회고하고자 한다.
 
 ## 파이썬을 사용한 이유
@@ -13,6 +14,9 @@ tags: [blockchain, smart contract, python]
 
 ## 보편적인 스마트 컨트랙트 배포 방식
 저번 스터디에는 [Time Token](http://winterj.me/project/time_second_token.sol)이라는 간단한 스마트 컨트랙트를 만들어 이를 [Mist 지갑](https://github.com/ethereum/mist) 클라이언트를 사용해 직접 배포하는 방식을 시연했다. 보통 배포 자체는 지갑 클라이언트를 사용하거나 [Truffle](https://github.com/trufflesuite/truffle)을 이용해 컴파일과 테스트를 거친 후 연동되어있는 이더리움 노드(e.g. [Geth](https://github.com/ethereum/go-ethereum), [Parity](https://github.com/paritytech/parity))를 통해 직접 배포하곤한다. TestRPC는 보통 개발단계에서 사용되며 현재 [Ganache](https://github.com/trufflesuite/ganache)로 이관되었다. (트러플에 가나슈까지 네이밍은 잘한다는 생각이 든다) 뒤에서도 말하겠지만 가나슈를 이용하면 스마트 컨트랙트를 개발하고 배포하는데 있어 여러 이점이 있다.
+
+- [스마트 컨트랙트의 이해](http://goodjoon.tistory.com/261)
+
 
 ## 이번에 해본 배포 방식
 Geth를 설치하고 구동시켜 프라이빗 체인을 구성시킨 후 solc를 사용해 스마트 컨트랙트 소스를 컴파일 한 후 web3를 사용해 저수준에서 직접 배포해봤다. 이를 위해선 여러모로 설치하고 설정해줘야 할 것들이 몇 가지 있는데 이 과정에서 많은 어려움이 있었다.
@@ -134,6 +138,8 @@ compiled_sol = compile_source(contract_source_code)
 
 ### Web3.py
 geth에서 구동되고 있는 이더리움 프라이빗 네트워크에 스마트 컨트랙트를 배포하고, 배포된 스마트 컨트랙트와 파이썬 서버가 상호작용하기 위해선 [web3.py](https://github.com/ethereum/web3.py)가 필요하다. 본래 노드와 HTTP기반 JSON RPC API를 이용해 트랜잭션을 생성하는 등의 작업을 할 수 있고, 이의 wrapper가 web3이다. 그리고 자바스크립트로 구현한 것이 web3.js, 파이썬으로 구현한 것이 web3.py다.
+
+- [JSON RPC API 기본](http://goodjoon.tistory.com/255)
 
 #### 설치
 `pip install web3`로 간단하게 설치할 수 있다.
