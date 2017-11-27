@@ -1,8 +1,8 @@
 title:            WinterJ Blog
 description:      Pythonic Blog
-disqus_shortname: 
+disqus_shortname:
 reading_time:     true
-words_per_minute: 50
+words_per_minute: 120
 url:              https://winterj.me
 repository:       JungWinter/JungWinter.github.io
 
