@@ -12,7 +12,7 @@ tags: [blockchain, smart contract, python, flask]
 
 <figure>
 	<a href="https://winterj.me/images/20171127/finish.png"><img src="https://winterj.me/images/20171127/finish.png" alt=""></a>
-	<figcaption>저번에 한 걸 요약한 사진. 파이썬으로 스마트 컨트랙트를 배포하고 호출했다.</figcaption>
+	<figcaption style="text-align: center;">저번에 한 걸 요약한 사진. 파이썬으로 스마트 컨트랙트를 배포하고 호출했다.</figcaption>
 </figure>
 
 > 작성한 코드는 [여기서](https://github.com/JungWinter/file-on-blockchain/blob/master/example/deploy_contract_and_test.py) 볼 수 있다.
@@ -54,7 +54,7 @@ PoC 수준에서 간단한 원본 증명 서비스를 제공한다. 사용자는
 #### `/check` - 파일 등재 여부 조회
 인덱스 페이지에서 파일을 업로드 해 그 파일이 블록체인에 존재하는지 조회한다. 존재한다면 파일의 메타정보 조회, 다운로드가 가능하다.
 
-## 솔리디티로 구현한 기능들
+## Solidity로 구현한 기능들
 저번에는 홈페이지에서 제공되는 예제로만 테스트해봤는데 이번에는 실제로 서비스에 사용될 기능을 설계하고, solidity를 사용해 [별도의 파일](https://github.com/JungWinter/file-on-blockchain/blob/master/app/storage.sol)로 작성했다. 컨트랙트는 2개가 존재하는데 `Owned`라는 컨트랙트는 접근 권한을 제한하는 Abstract Contract에 가깝다. 실제 기능은 `FileHashStorage`컨트랙트에 기술되어 있다.
 
 - [유용한 Storage 컨트랙트 패턴](https://ethereum.stackexchange.com/questions/13167/are-there-well-solved-and-simple-storage-patterns-for-solidity)
@@ -95,11 +95,13 @@ mapping(string => string[]) private fileOwners;
 ```
 특정 사용자가 여러 파일을 업로드 했을 때, 그 사용자가 올린 모든 파일의 해시값을 조회하기 위해 선언해둔 변수다. 스마트 컨트랙트의 별도로 getter를 구현해두지 않았기에 현재는 사용할 수 없는 변수지만 향후 기능을 업데이트할 때 참고하기 위해 남겨두었다. `fileOwners["Jung"] = ["0xABCD1234", "0xDEAD4321"]`의 형태를 가지고 있다.
 
+#### owners
 ```java
 string[] public owners;
 ```
 파일을 업로드한 사용자의 이름을 가지고 있는 리스트다. 서버 기능으로 구현해두진 않았지만 `getOwnerName` 함수에 인덱스 번호를 전달해 사용자의 이름을 반환받을 수 있다. 모든 사용자의 이름을 알고 싶다면 `ownerID` 혹은 `owners.length`로 길이를 가져와 해당하는 만큼 `getOwnerName(i)`를 호출하면 된다. `owners = ["Jung", "Park", ...]`의 형태를 가지고 있다.
 
+#### ownerID
 ```go
 uint public ownerID = 0;
 ```
@@ -107,7 +109,7 @@ uint public ownerID = 0;
 
 
 ### `upload` - 업로드
-```js
+```java
 function upload(string personName, string fileHash, string fileName, uint fileSize) onlyOwner public {
     ownerID++;
     owners.push(personName);
@@ -140,9 +142,10 @@ Solidity로 스마트 컨트랙트 코드를 작성하며 매우 많은 오류�
 
 
 ## 개선해야할 점
-- [ ] async upload
-- [ ] 특정 사용자가 올린 모든 파일의 해시 리스트 반환
-- [ ] 컨트랙트 초기 배포
+- async upload
+- 특정 사용자가 올린 모든 파일의 해시 리스트 반환
+- 컨트랙트 초기 배포
+- 파일 분산 저장 ipfs
 
 ## 마치며
 혹시 잘못된 점이나 궁금한 점이 있다면 언제든지 **wintermy201@gmail.com** 로 메일을 보내주기 바랍니다.
