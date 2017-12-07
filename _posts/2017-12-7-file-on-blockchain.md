@@ -117,6 +117,10 @@ function upload(string personName, string fileHash, string fileName, uint fileSi
     files[fileHash] = f;
 }
 ```
+입력받은 정보들을 스마트 컨트랙트 내부에 저장한다. 사용자 이름은 `owners`, 파일 해시와 파일 이름과 사이즈는 `File` struct를 생성해준 후 `files`에 저장하며 key값은 파일 해시로 지정해준다. `File` struct는 임시로 생성해줄 것이기 때문에 memory 키워드를 붙여 초기화해줬다. 굳이 저렇게 할 필요없이 바로 초기화하며 할당해도 되지만 Event에도 넘겨주기 위해 코드의 중복을 막고자 별도의 로컬 변수로 선언해주었다. 예시 코드상엔 Event가 포함되어있지 않다. `now`는 글로벌 변수로 현재 트랜잭션이 처리되는 머신의 타임스탬프 값이다.
+
+- [struct를 생성하는 방법](https://ethereum.stackexchange.com/questions/1511/how-to-initialize-a-struct)
+- [Solidity의 글로벌 변수](http://solidity.readthedocs.io/en/develop/units-and-global-variables.html)
 
 ### `checkExist` - 존재 확인
 ```java
@@ -127,6 +131,7 @@ function checkExist(string fileHash) onlyOwner public view returns (bool) {
     return false;
 }
 ```
+위에서도 언급했듯이 존재하지 않는 key로 접근하면 에러가 나는게 아니라 default 값을 반환한다. 그렇기에 파일 해시를 key로 메타 정보를 조회해봤을 때 `size`가 0이라면 존재하지 않는다고 판단할 수 있다. 참고로 `onlyOnwer`는 앞에서 말한 `Owner` 컨트랙트에 존재하는 [modifier](https://image.slidesharecdn.com/smartcontractandsolidity-170919052746/95/smart-contract-and-solidity-25-638.jpg?cb=1506008674)다. solidity 0.4.16부터 `constant`는 `view`와 `pure`로 분리되었는데 기존의 `constant`는 `view`와 같다. [여기서](https://ethereum.stackexchange.com/questions/25200/solidity-what-is-the-difference-between-view-and-constant) 더 자세한 차이점을 볼 수 있다.
 
 ### `getFileInfo` - 파일 메타 정보 반환
 ```java
@@ -134,18 +139,50 @@ function getFileInfo(string fileHash) onlyOwner public view returns (string, uin
     return (files[fileHash].name, files[fileHash].uploadDate, files[fileHash].size);
 }
 ```
+struct를 반환한다. 0.4.17부터는 `pragma experimental ABIEncoderV2`를 명시해 줌으로써 struct를 반환할 수 있으나 그 이하에서는 일일이 멤버변수와 자료형을 지정해서 반환해줘야한다. `FileHashStorage`는 0.4.16 컴파일러를 사용하기에 괄호로 감싸 반환해주었다. 이 경우 받는 쪽에서는 리스트로 값을 받을 수 있다.
 
-## 의사 결정 과정
+- [struct를 반환하려면](https://ethereum.stackexchange.com/questions/7317/how-can-i-return-struct-when-function-is-called)
+
+## 파이썬 서버와 스마트 컨트랙트
+Flask에서 web3.py를 사용해 스마트 컨트랙트와 상호작용 하는 부분을 간략하게 옮겨본다.
+
+```py
+# 파일 업로드
+transaction = contract_instance.transact({"from": web3.eth.accounts[0]})
+tx_hash = transaction.upload(owner,
+                             filehash,
+                             filename,
+                             filesize)
+
+
+# 파일 메타 정보 반환                           
+file_info = contract_instance.call().getFileInfo(filehash)
+
+# 파일 존재 여부 확인
+is_exist = contract_instance.call().checkExist(filehash)
+```
+
+저번 글에서도 언급했듯이 `view` 함수들은 단순히 컨트랙트 스토리지의 값만 읽는 것이므로 별도의 마이닝 과정이 필요 없고, `upload`함수는 트랜잭션을 발행해서 스토리지를 갱신시키는 작업이기 때문에 마이닝 과정이 필요하다.
 
 ## 문제가 됐던 부분
-Solidity로 스마트 컨트랙트 코드를 작성하며 매우 많은 오류를 만나고 디버깅 과정을 거쳤다. [공식 예제를 분석했을 때](https://www.slideshare.net/wintermy201/smart-contract-and-solidity)나 `Greeter`같은 예제로 사용했을 때는 별다른 문제가 없었지만 `mapping`, `struct`, `view`등의 개념을 실제로 사용될 코드와 결합하는 것은 다른 영역이었다.
+Solidity로 스마트 컨트랙트 코드를 작성하며 매우 많은 오류를 만나고 디버깅 과정을 거쳤다. [공식 예제를 분석했을 때](https://www.slideshare.net/wintermy201/smart-contract-and-solidity)나 `Greeter`같은 예제로 사용했을 때는 별다른 문제가 없었지만 `mapping`, `struct`, `view`등의 개념이 적용된 컨트랙트를 작성하고 파이썬 서버에서 사용하는 것은 다른 영역이었다. 코드를 고치고 버그를 잡으면서 기록해둔 링크들을 적어본다.
 
+- `smart contract dynamically-sized keys`: remix에서 컴파일 했을 때 나오는 에러.
+	- [가변 키 컴파일 에러에 관한 논의](https://ethereum.stackexchange.com/questions/2397/internal-compiler-error-accessors-for-mapping-with-dynamically-sized-keys-not-y): public을 private으로 바꾸거나 getter를 만들어 줘야한다.
+	- [public, private, internal, external 차이](https://forum.ethereum.org/discussion/3344/function-visibility-whats-the-difference-between-private-and-internal-if-any)
+- `solidity return array`: 배열을 반환하려면 어떻게 해야하는지.
+	- [기본적으로 불가능하지만 우회법은 있다.](https://ethereum.stackexchange.com/questions/17312/solidity-can-you-return-dynamic-arrays-in-a-function)
+- `web3 contract deploy parameter`: 컨트랙트를 배포할 때 생성자로 인자를 어떻게 넘겨주는지.
+	- [web3.py 에선 args로 넘겨주면 된다.](http://web3py.readthedocs.io/en/latest/contracts.html#web3.contract.Contract.deploy)
+- [컨트랙트를 파일로 불러와 컴파일 하기](https://github.com/ethereum/py-solc): 굳이 `compile_source`할 필요 없이 `compile_files`로 할 수 있고, 컨트랙트 파일을 리스트로 넘겨야 한다.
+- `contract_instance`를 contract모듈의 전역변수로 선언하고 Flask에서 불러와서 사용하려 했으나 실패함. pickle로 dump&load하려 했으나 실패함. 그냥 팩토리 만들어서 Flask 단에서 전역변수로 활용했다.
 
-## 개선해야할 점
-- async upload
-- 특정 사용자가 올린 모든 파일의 해시 리스트 반환
-- 컨트랙트 초기 배포
-- 파일 분산 저장 ipfs
+## 개선해야 할 점
+**File on blockchain** 은 아직 개선해야할 점이 많다. Proof of concept라는 생각으로 만들었지만 미래의 나 혹은 다른 사람들의 즐거움을 위해 일부러 남겨둔 부분도 있다.
+- **Async upload**: 코드를 보면 알겠지만 서버에서 `upload`를 처리할 때 마이닝을 위해 `time.sleep()`하는 부분이 있다. 이 부분은 메인 스레드를 중단시키므로 웹 서버에선 없어져야 할 부분이다. `async`, `await`를 활용하거나 스레드를 사용해서 비동기적인 로직으로 개선시킬 필요가 있다.
+- 특정 사용자가 올린 모든 파일의 해시 리스트 반환: 해당 기능을 위해 `fileOwners` 변수를 만들어두긴 했지만 서버에서 이를 활용하는 부분은 존재하지 않는다. 진짜 파일, 가짜 파일 2개를 올려두고 타인에게 잘못된 파일을 줬음에도 일단 블록체인에 존재하기 때문에 True를 반환하는데, 그 부분을 방지하고자 한다면 그 사람이 어떤 파일들을 올렸는지 파악할 필요가 있다. 서버 사이드에서 `owners.length` 혹은 `ownerID`를 기준으로 반복문을 돌며 체크하는 부분이 필요하고 컨트랙트에서 `fileOwners`의 getter를 만들 필요가 있다.
+- 컨트랙트 초기 배포: 지금은 [Geth를 초기화](https://github.com/JungWinter/file-on-blockchain/blob/master/blockchain/init.sh)하고 [프라이빗 네트워크로 구동](https://github.com/JungWinter/file-on-blockchain/blob/master/blockchain/start.sh)시킨 다음 어카운트를 만들고 소량의 이더를 직접 채굴해준 다음 `server.py`를 실행시켜 초기 컨트랙트 배포를 기다려야한다. 이부분을 [Ganache](https://github.com/trufflesuite/ganache)와 [Truffle](https://github.com/trufflesuite/truffle)을 사용함으로써 개선시킬 수 있으리라 예상한다.
+- 파일 분산 저장: 업로드 된 파일을 AWS S3 혹은 서버 폴더에 저장하고 있는데 이는 분산화를 관점에서 더 개선시킬 여지가 있다. 아직은 개발중이지만 파일을 분산 저장 시키기 위해 [ipfs](https://ipfs.io)를 이용할 수 있을 것이다. [ether spinner](http://etherspinner.com/)라는 dApp도 js를 ipfs로 관리한다.
 
 ## 마치며
-혹시 잘못된 점이나 궁금한 점이 있다면 언제든지 **wintermy201@gmail.com** 로 메일을 보내주기 바랍니다.
+파이썬 Flask 서버와 블록체인을 이용한 간단한 파일 원본 증명 서비스는 [Github/file-on-blockchain](https://github.com/JungWinter/file-on-blockchain)에 소스가 공개되어 있습니다. 앞에서 언급한 개선점 말고도 더 발전시키고 싶으신 분들의 PR을 환영합니다. 혹시 잘못된 점이나 궁금한 점이 있다면 언제든지 **wintermy201@gmail.com** 로 메일을 보내주기 바랍니다.
