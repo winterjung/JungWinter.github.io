@@ -176,13 +176,14 @@ Solidity로 스마트 컨트랙트 코드를 작성하며 매우 많은 오류�
 	- [web3.py 에선 args로 넘겨주면 된다.](http://web3py.readthedocs.io/en/latest/contracts.html#web3.contract.Contract.deploy)
 - [컨트랙트를 파일로 불러와 컴파일 하기](https://github.com/ethereum/py-solc): 굳이 `compile_source`할 필요 없이 `compile_files`로 할 수 있고, 컨트랙트 파일을 리스트로 넘겨야 한다.
 - `contract_instance`를 contract모듈의 전역변수로 선언하고 Flask에서 불러와서 사용하려 했으나 실패함. pickle로 dump&load하려 했으나 실패함. 그냥 팩토리 만들어서 Flask 단에서 전역변수로 활용했다.
+- 원래는 파일을 블록체인에 저장하려 했으나 [1 MB를 저장하는데 32 ETH](https://ethereum.stackexchange.com/questions/872/what-is-the-cost-to-store-1kb-10kb-100kb-worth-of-data-into-the-ethereum-block)(2017.12.07 기준 1,760만원)가 든다기에 해시만 저장하는 식으로 선회했다.
 
 ## 개선해야 할 점
 **File on blockchain** 은 아직 개선해야할 점이 많다. Proof of concept라는 생각으로 만들었지만 미래의 나 혹은 다른 사람들의 즐거움을 위해 일부러 남겨둔 부분도 있다.
 - **Async upload**: 코드를 보면 알겠지만 서버에서 `upload`를 처리할 때 마이닝을 위해 `time.sleep()`하는 부분이 있다. 이 부분은 메인 스레드를 중단시키므로 웹 서버에선 없어져야 할 부분이다. `async`, `await`를 활용하거나 스레드를 사용해서 비동기적인 로직으로 개선시킬 필요가 있다.
-- 특정 사용자가 올린 모든 파일의 해시 리스트 반환: 해당 기능을 위해 `fileOwners` 변수를 만들어두긴 했지만 서버에서 이를 활용하는 부분은 존재하지 않는다. 진짜 파일, 가짜 파일 2개를 올려두고 타인에게 잘못된 파일을 줬음에도 일단 블록체인에 존재하기 때문에 True를 반환하는데, 그 부분을 방지하고자 한다면 그 사람이 어떤 파일들을 올렸는지 파악할 필요가 있다. 서버 사이드에서 `owners.length` 혹은 `ownerID`를 기준으로 반복문을 돌며 체크하는 부분이 필요하고 컨트랙트에서 `fileOwners`의 getter를 만들 필요가 있다.
-- 컨트랙트 초기 배포: 지금은 [Geth를 초기화](https://github.com/JungWinter/file-on-blockchain/blob/master/blockchain/init.sh)하고 [프라이빗 네트워크로 구동](https://github.com/JungWinter/file-on-blockchain/blob/master/blockchain/start.sh)시킨 다음 어카운트를 만들고 소량의 이더를 직접 채굴해준 다음 `server.py`를 실행시켜 초기 컨트랙트 배포를 기다려야한다. 이부분을 [Ganache](https://github.com/trufflesuite/ganache)와 [Truffle](https://github.com/trufflesuite/truffle)을 사용함으로써 개선시킬 수 있으리라 예상한다.
-- 파일 분산 저장: 업로드 된 파일을 AWS S3 혹은 서버 폴더에 저장하고 있는데 이는 분산화를 관점에서 더 개선시킬 여지가 있다. 아직은 개발중이지만 파일을 분산 저장 시키기 위해 [ipfs](https://ipfs.io)를 이용할 수 있을 것이다. [ether spinner](http://etherspinner.com/)라는 dApp도 js를 ipfs로 관리한다.
+- **특정 사용자가 올린 모든 파일의 해시 리스트 반환**: 해당 기능을 위해 `fileOwners` 변수를 만들어두긴 했지만 서버에서 이를 활용하는 부분은 존재하지 않는다. 진짜 파일, 가짜 파일 2개를 올려두고 타인에게 잘못된 파일을 줬음에도 일단 블록체인에 존재하기 때문에 True를 반환하는데, 그 부분을 방지하고자 한다면 그 사람이 어떤 파일들을 올렸는지 파악할 필요가 있다. 서버 사이드에서 `owners.length` 혹은 `ownerID`를 기준으로 반복문을 돌며 체크하는 부분이 필요하고 컨트랙트에서 `fileOwners`의 getter를 만들 필요가 있다.
+- **컨트랙트 초기 배포**: 지금은 [Geth를 초기화](https://github.com/JungWinter/file-on-blockchain/blob/master/blockchain/init.sh)하고 [프라이빗 네트워크로 구동](https://github.com/JungWinter/file-on-blockchain/blob/master/blockchain/start.sh)시킨 다음 어카운트를 만들고 소량의 이더를 직접 채굴해준 다음 `server.py`를 실행시켜 초기 컨트랙트 배포를 기다려야한다. 이부분을 [Ganache](https://github.com/trufflesuite/ganache)와 [Truffle](https://github.com/trufflesuite/truffle)을 사용함으로써 개선시킬 수 있으리라 예상한다.
+- **파일 분산 저장**: 업로드 된 파일을 AWS S3 혹은 서버 폴더에 저장하고 있는데 이는 분산화를 관점에서 더 개선시킬 여지가 있다. 아직은 개발중이지만 파일을 분산 저장 시키기 위해 [ipfs](https://ipfs.io)를 이용할 수 있을 것이다. [ether spinner](http://etherspinner.com/)라는 dApp도 js를 ipfs로 관리한다.
 
 ## 마치며
 파이썬 Flask 서버와 블록체인을 이용한 간단한 파일 원본 증명 서비스는 [Github/file-on-blockchain](https://github.com/JungWinter/file-on-blockchain)에 소스가 공개되어 있습니다. 앞에서 언급한 개선점 말고도 더 발전시키고 싶으신 분들의 PR을 환영합니다. 혹시 잘못된 점이나 궁금한 점이 있다면 언제든지 **wintermy201@gmail.com** 로 메일을 보내주기 바랍니다.
