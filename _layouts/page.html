@@ -40,16 +40,16 @@
         {% if page.modified %}<span>Updated on <span class="entry-date date published updated"><time datetime="{{ page.modified }}">{{ page.modified | date: "%B %d, %Y" }}</time></span></span>
         <span class="author vcard"><span class="fn">{{ site.owner.name }}</span></span>{% endif %}
         {% if page.share != false %}{% include social-share.html %}{% endif %}
+        {% if page.comments != false %}
+          <script src="https://utteranc.es/client.js"
+                  repo="JungWinter/jungwinter.github.io"
+                  branch="master"
+                  issue-term="title"
+                  async>
+          </script>
+        {% endif %}
       </footer>
     </div><!-- /.entry-content -->
-    {% if page.comments != false %}
-      <script src="https://utteranc.es/client.js"
-              repo="JungWinter/jungwinter.github.io"
-              branch="master"
-              issue-term="title"
-              async>
-      </script>
-    {% endif %}
   </article>
 </div><!-- /#main -->
 
