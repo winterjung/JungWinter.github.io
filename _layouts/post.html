@@ -48,7 +48,14 @@
         {% if page.share != false %}{% include social-share.html %}{% endif %}
       </footer>
     </div><!-- /.entry-content -->
-    {% if page.comments != false and site.disqus_shortname %}<section id="disqus_thread"></section><!-- /#disqus_thread -->{% endif %}
+    {% if page.comments != false %}
+      <script src="https://utteranc.es/client.js"
+              repo="JungWinter/jungwinter.github.io"
+              branch="master"
+              issue-term="title"
+              async>
+      </script>
+    {% endif %}
     {% if site.related_posts.size > 0 %}{% include read-more.html %}{% endif %}
   </article>
 </div><!-- /#main -->
