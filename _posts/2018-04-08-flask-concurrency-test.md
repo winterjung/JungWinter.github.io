@@ -64,17 +64,37 @@ celery는 메시지 패싱 방식의 분산 비동기 작업 큐로 pdf 변환, 
 
 ### 결과
 
-#### RPS (Request per second)
+pandas, plotly를 이용해 그래프로 그렸으며 과정은 [jupyter notebook 코드]에서 확인할 수 있다.
 
-|sleep|request|compute|
-|:------:|:-----:|:------:|
-|![s_rps]|![r_rps]|![c_rps]|
+#### Request per second (클릭시 커짐)
 
-#### TPR (Time per request [sec])
+<figure class="third">
+	<a href="https://winterj.me/images/20180408/s_rps.svg">
+        <img src="https://winterj.me/images/20180408/s_rps.svg" alt="sleep api rps">
+    </a>
+	<a href="https://winterj.me/images/20180408/r_rps">
+        <img src="https://winterj.me/images/20180408/r_rps" alt="request api rps">
+    </a>
+	<a href="https://winterj.me/images/20180408/c_rps">
+        <img src="https://winterj.me/images/20180408/c_rps" alt="compute api rps">
+    </a>
+	<figcaption style="text-align: center;">sleep / request / compute test rps</figcaption>
+</figure>
 
-|sleep|request|compute|
-|:------:|:-----:|:------:|
-|![s_tpr]|![r_tpr]|![c_tpr]|
+#### Time per request (클릭시 커짐)
+
+<figure class="third">
+	<a href="https://winterj.me/images/20180408/s_tpr.svg">
+        <img src="https://winterj.me/images/20180408/s_tpr.svg" alt="sleep api tpr">
+    </a>
+	<a href="https://winterj.me/images/20180408/r_tpr">
+        <img src="https://winterj.me/images/20180408/r_tpr" alt="request api tpr">
+    </a>
+	<a href="https://winterj.me/images/20180408/c_tpr">
+        <img src="https://winterj.me/images/20180408/c_tpr" alt="compute api tpr">
+    </a>
+	<figcaption style="text-align: center;">sleep / request / compute test tpr</figcaption>
+</figure>
 
 [flask앱은 기본적으로 동기적(synchronous)]: http://flask.pocoo.org/docs/0.12/design/#thread-locals
 [aiohttp 라이브러리 버전이 1.3.5 이하]: https://github.com/benoitc/gunicorn/issues/1526
@@ -85,9 +105,4 @@ celery는 메시지 패싱 방식의 분산 비동기 작업 큐로 pdf 변환, 
 [httpbin.org]: http://httpbin.org
 [apache benchmark tool인 ab]: https://httpd.apache.org/docs/2.4/programs/ab.html
 [간단한 스크립트]: https://github.com/JungWinter/Code_Study/blob/master/Etc/gunicorn_flask_test/gunicorn_test.py
-[r_rps]: https://rawgit.com/JungWinter/Code_Study/master/Etc/gunicorn_flask_test/request%20_%20rps.svg
-[s_rps]: https://rawgit.com/JungWinter/Code_Study/master/Etc/gunicorn_flask_test/sleep%20_%20rps.svg
-[c_rps]: https://rawgit.com/JungWinter/Code_Study/master/Etc/gunicorn_flask_test/compute%20_%20rps.svg
-[r_tpr]: https://rawgit.com/JungWinter/Code_Study/master/Etc/gunicorn_flask_test/request%20_%20tpr.svg
-[s_tpr]: https://rawgit.com/JungWinter/Code_Study/master/Etc/gunicorn_flask_test/sleep%20_%20tpr.svg
-[c_tpr]: https://rawgit.com/JungWinter/Code_Study/master/Etc/gunicorn_flask_test/compute%20_%20tpr.svg
+[jupyter notebook 코드]: https://github.com/JungWinter/Code_Study/blob/master/Etc/gunicorn_flask_test/analysis.ipynb
