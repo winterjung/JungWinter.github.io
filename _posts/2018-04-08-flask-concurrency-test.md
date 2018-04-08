@@ -70,13 +70,13 @@ pandas, plotly를 이용해 그래프로 그렸으며 과정은 [jupyter noteboo
 
 <figure class="third">
 	<a href="https://winterj.me/images/20180408/s_rps.svg">
-        <img src="https://winterj.me/images/20180408/s_rps.svg" alt="sleep api rps">
+        <img src="https://winterj.me/images/20180408/s_rps.svg" alt="">
     </a>
-	<a href="https://winterj.me/images/20180408/r_rps">
-        <img src="https://winterj.me/images/20180408/r_rps" alt="request api rps">
+	<a href="https://winterj.me/images/20180408/r_rps.svg">
+        <img src="https://winterj.me/images/20180408/r_rps.svg" alt="">
     </a>
-	<a href="https://winterj.me/images/20180408/c_rps">
-        <img src="https://winterj.me/images/20180408/c_rps" alt="compute api rps">
+	<a href="https://winterj.me/images/20180408/c_rps.svg">
+        <img src="https://winterj.me/images/20180408/c_rps.svg" alt="">
     </a>
 	<figcaption style="text-align: center;">sleep / request / compute test rps</figcaption>
 </figure>
@@ -85,13 +85,13 @@ pandas, plotly를 이용해 그래프로 그렸으며 과정은 [jupyter noteboo
 
 <figure class="third">
 	<a href="https://winterj.me/images/20180408/s_tpr.svg">
-        <img src="https://winterj.me/images/20180408/s_tpr.svg" alt="sleep api tpr">
+        <img src="https://winterj.me/images/20180408/s_tpr.svg" alt="">
     </a>
-	<a href="https://winterj.me/images/20180408/r_tpr">
-        <img src="https://winterj.me/images/20180408/r_tpr" alt="request api tpr">
+	<a href="https://winterj.me/images/20180408/r_tpr.svg">
+        <img src="https://winterj.me/images/20180408/r_tpr.svg" alt="">
     </a>
-	<a href="https://winterj.me/images/20180408/c_tpr">
-        <img src="https://winterj.me/images/20180408/c_tpr" alt="compute api tpr">
+	<a href="https://winterj.me/images/20180408/c_tpr.svg">
+        <img src="https://winterj.me/images/20180408/c_tpr.svg" alt="">
     </a>
 	<figcaption style="text-align: center;">sleep / request / compute test tpr</figcaption>
 </figure>
