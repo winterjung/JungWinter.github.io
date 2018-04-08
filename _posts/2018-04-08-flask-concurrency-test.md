@@ -68,19 +68,19 @@ celery는 메시지 패싱 방식의 분산 비동기 작업 큐로 pdf 변환, 
 
 ### 결과
 
-pandas, plotly를 이용해 그래프로 그렸으며 과정은 [jupyter notebook 코드]에서 확인할 수 있다.
+pandas, plotly를 이용해 그래프로 그렸으며 과정은 [jupyter notebook 코드]에서 확인할 수 있다. 공통적으로 분홍색은 sync, 하늘색은 gevent, 연녹색은 gaiohttp worker이며 RPS는 높을수록 좋고, TPR은 낮을수록 좋다.
 
 #### Request per second (클릭시 커짐)
 
 <figure class="third">
-	<a href="https://winterj.me/images/20180408/s_rps.svg">
-        <img src="https://winterj.me/images/20180408/s_rps.svg" alt="">
+	<a href="https://winterj.me/images/20180408/s_rps.png">
+        <img src="https://winterj.me/images/20180408/s_rps.png" alt="">
     </a>
-	<a href="https://winterj.me/images/20180408/r_rps.svg">
-        <img src="https://winterj.me/images/20180408/r_rps.svg" alt="">
+	<a href="https://winterj.me/images/20180408/r_rps.png">
+        <img src="https://winterj.me/images/20180408/r_rps.png" alt="">
     </a>
-	<a href="https://winterj.me/images/20180408/c_rps.svg">
-        <img src="https://winterj.me/images/20180408/c_rps.svg" alt="">
+	<a href="https://winterj.me/images/20180408/c_rps.png">
+        <img src="https://winterj.me/images/20180408/c_rps.png" alt="">
     </a>
 	<figcaption style="text-align: center;">sleep / request / compute test rps</figcaption>
 </figure>
@@ -88,14 +88,14 @@ pandas, plotly를 이용해 그래프로 그렸으며 과정은 [jupyter noteboo
 #### Time per request (클릭시 커짐)
 
 <figure class="third">
-	<a href="https://winterj.me/images/20180408/s_tpr.svg">
-        <img src="https://winterj.me/images/20180408/s_tpr.svg" alt="">
+	<a href="https://winterj.me/images/20180408/s_tpr.png">
+        <img src="https://winterj.me/images/20180408/s_tpr.png" alt="">
     </a>
-	<a href="https://winterj.me/images/20180408/r_tpr.svg">
-        <img src="https://winterj.me/images/20180408/r_tpr.svg" alt="">
+	<a href="https://winterj.me/images/20180408/r_tpr.png">
+        <img src="https://winterj.me/images/20180408/r_tpr.png" alt="">
     </a>
-	<a href="https://winterj.me/images/20180408/c_tpr.svg">
-        <img src="https://winterj.me/images/20180408/c_tpr.svg" alt="">
+	<a href="https://winterj.me/images/20180408/c_tpr.png">
+        <img src="https://winterj.me/images/20180408/c_tpr.png" alt="">
     </a>
 	<figcaption style="text-align: center;">sleep / request / compute test tpr</figcaption>
 </figure>
