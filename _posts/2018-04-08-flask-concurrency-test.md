@@ -118,9 +118,9 @@ compute는 다른 두개의 테스트와 다르게 CPU bound 작업을 수행하
 [aiohttp 라이브러리 버전이 1.3.5 이하]: https://github.com/benoitc/gunicorn/issues/1526
 [`gaiohttp`를 사용하기 위한 다른 방법]: http://docs.gunicorn.org/en/latest/design.html#asyncio-workers
 [flask 앱을 감싸는 방법]: https://github.com/benoitc/gunicorn/blob/master/examples/frameworks/flaskapp_aiohttp_wsgi.py
-[Github에 올려둔 `blocking_flask.py` 코드]: https://github.com/JungWinter/Code_Study/blob/master/Etc/gunicorn_flask_test/blocking_flask.py
+[Github에 올려둔 `blocking_flask.py` 코드]: https://github.com/JungWinter/Code_Study/blob/master/Python/Research/gunicorn_flask_test/blocking_flask.py
 [공식 문서에서 권장하는 워커와 스레드의 개수]: http://docs.gunicorn.org/en/stable/settings.html#worker-processes
 [httpbin.org]: http://httpbin.org
 [apache benchmark tool인 ab]: https://httpd.apache.org/docs/2.4/programs/ab.html
-[간단한 스크립트]: https://github.com/JungWinter/Code_Study/blob/master/Etc/gunicorn_flask_test/gunicorn_test.py
-[jupyter notebook 코드]: https://github.com/JungWinter/Code_Study/blob/master/Etc/gunicorn_flask_test/analysis.ipynb
+[간단한 스크립트]: https://github.com/JungWinter/Code_Study/blob/master/Python/Research/gunicorn_flask_test/gunicorn_test.py
+[jupyter notebook 코드]: https://github.com/JungWinter/Code_Study/blob/master/Python/Research/gunicorn_flask_test/analysis.ipynb
