@@ -2,6 +2,7 @@
 layout: post
 title: 기술 문서 정리 - 06
 tags: [article, python, 파이썬]
+section: article
 ---
 
 읽은 기술 문서를 정리해보는 글이다. 나중에 필요할 때 찾기 쉽도록 정리해두는 아카이빙도 겸한다.

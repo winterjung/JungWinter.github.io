@@ -1,0 +1,37 @@
+---
+layout: post-index
+title: Personal docs
+comments: false
+---
+
+{% assign items = site.personal | sort: 'section' %}
+{% for post in items %}
+    {% capture this_section %}{{ post.section }}{% endcapture %}
+
+    {% if forloop.first %}
+    {% capture first_section %}{{ post.section }}{% endcapture %}
+    <article>
+      <h2>{{ first_section | replace: '-', ' ' | capitalize }}</h2>
+      <ul>
+    {% endif %}
+
+    {% if this_section != first_section %}
+    {% capture first_section %}{{ post.section }}{% endcapture %}
+      </ul>
+    </article>
+    <article>
+      <h2>{{ this_section | replace: '-', ' ' | capitalize }}</h2>
+      <ul>
+    {% endif %}
+
+        <li class="entry-title">
+          <a href="{{ site.url }}{{ post.url }}" title="{{ post.title }}">
+            {{ post.title }}
+          </a>
+        </li>
+
+    {% if forloop.last %}
+      </ul>
+    </article>
+    {% endif %}
+{% endfor %}

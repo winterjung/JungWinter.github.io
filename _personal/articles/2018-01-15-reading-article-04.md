@@ -2,6 +2,7 @@
 layout: post
 title: 문서 읽기 - 04
 tags: [article, python, 파이썬, 리뷰]
+section: article
 ---
 
 오랜만에 정리해본다. 누군가에게 보여주려고가 아닌 읽은 걸 정리해보고 얻을 걸 얻자는 의미에서 적어본다.

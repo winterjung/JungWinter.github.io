@@ -2,6 +2,7 @@
 layout: post
 title: 텐서플로와 시퀀스 모델을 배우기 좋은 <딥러닝의 정석> 리뷰
 tags: [python, 파이썬, book, 리뷰, 머신러닝]
+section: book
 ---
 
 본 게시글은 한빛미디어의 나는 리뷰어다 이벤트로 제공받은 [딥러닝의 정석](http://www.hanbit.co.kr/store/books/look.php?p_code=B5128867520) 책에 대한 리뷰입니다.

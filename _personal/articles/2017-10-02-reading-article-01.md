@@ -2,6 +2,7 @@
 layout: post
 title: 마음찍어둔 문서 읽기 - 01
 tags: [article, python, 파이썬, 리뷰]
+section: article
 ---
 
 ## 목적

@@ -2,6 +2,7 @@
 layout: post
 title: 맥에서의 jupyter notebook 에러 해결
 tags: [python, jupyter, 파이썬]
+section: general
 ---
 
 ## 현상

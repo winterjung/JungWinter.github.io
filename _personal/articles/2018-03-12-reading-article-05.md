@@ -2,6 +2,7 @@
 layout: post
 title: 기술 문서 정리 - 05
 tags: [article, python, 파이썬]
+section: article
 ---
 
 오랜만에 읽은 글들을 정리해보려 한다.

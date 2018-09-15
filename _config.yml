@@ -52,6 +52,11 @@ permalink:   /:categories/:title/
 
 # Amount of post to show on home page
 paginate: 5
+collections:
+  personal:
+    output: true
+    permalink: /:collection/:title
+
 
 kramdown:
   input: GFM

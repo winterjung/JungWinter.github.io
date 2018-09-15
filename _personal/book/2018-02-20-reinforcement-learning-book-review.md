@@ -2,6 +2,7 @@
 layout: post
 title: 첫걸음의 방향을 제대로 잡아주는 <강화학습 첫걸음> 리뷰
 tags: [python, 파이썬, book, 리뷰, 머신러닝]
+section: book
 ---
 
 본 게시글은 한빛미디어의 나는 리뷰어다 이벤트로 제공받은 [강화학습 첫걸음](http://www.hanbit.co.kr/store/books/look.php?p_code=B9929859785) 책에 대한 리뷰입니다.
