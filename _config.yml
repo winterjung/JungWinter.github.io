@@ -1,5 +1,5 @@
-title:            WinterJ Blog
-description:      Pythonic Blog
+title:            winterjung blog
+description:      engineering blog
 disqus_shortname:
 reading_time:     true
 words_per_minute: 120
@@ -11,13 +11,13 @@ owner:
   name:           정겨울
   avatar:         avatar.jpg
   bio:            "파이썬 좋아요"
-  email:          wintermy201@gmail.com
+  email:          me@winterjung.dev
   # Social networking links used in footer. Update and remove as you like.
   twitter:        res_tin
   facebook:       
   github:         JungWinter
   stackexchange:  
-  linkedin:       
+  linkedin:       jungwinter
   instagram:        
   flickr:         
   tumblr:         
