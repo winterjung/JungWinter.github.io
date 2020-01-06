@@ -3,6 +3,7 @@ layout: post
 title: 파이썬에서 부동소수점 오차 해결하기
 redirect_from:
     - /Floating-Point
+    - /Floating-Point/
 image:
     feature: 20200106/header.png
 tags: [python, tip]
