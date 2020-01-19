@@ -10,7 +10,7 @@ tags: [python, book]
 
 <figure>
   <a href="https://www.aladin.co.kr/search/wsearchresult.aspx?SearchTarget=All&SearchWord=%C6%C4%C0%CC%BD%E3">
-    <img src="https://user-images.githubusercontent.com/13811604/71542824-95a6b400-29ae-11ea-8881-8ba78451496a.png" width="300" alt="python keyword search result">
+    <img src="https://user-images.githubusercontent.com/13811604/71542824-95a6b400-29ae-11ea-8881-8ba78451496a.png" alt="python keyword search result">
   </a>
   <figcaption>
     파이썬으로 검색하면 나오는 수많은 책들
@@ -27,7 +27,7 @@ tags: [python, book]
 
 ### 파이썬 코딩의 기술
 
-<figure>
+<figure style="text-align: center;">
   <a href="http://www.yes24.com/Product/Goods/25138160">
     <img src="https://user-images.githubusercontent.com/13811604/71542827-9a6b6800-29ae-11ea-8e94-cd4629471aa2.png" width="300" alt="book image">
   </a>
@@ -44,7 +44,7 @@ tags: [python, book]
 
 ### 파이썬을 여행하는 히치하이커를 위한 안내서
 
-<figure>
+<figure style="text-align: center;">
   <a href="https://blog.insightbook.co.kr/2017/11/24/광활한-파이썬-세계를-여행하는-히치하이커를-위한/">
     <img src="https://user-images.githubusercontent.com/13811604/71542828-9dfeef00-29ae-11ea-9ea6-38c640782db7.png" width="300" alt="book image">
   </a>
@@ -64,7 +64,7 @@ tags: [python, book]
 
 ### 슬기로운 파이썬 트릭
 
-<figure>
+<figure style="text-align: center;">
   <a href="https://blog.insightbook.co.kr/2019/01/23/%ED%8C%8C%EC%9D%B4%EC%8D%AC-%ED%91%9C%ED%98%84%EB%A0%A5%EC%9D%84-%EB%81%8C%EC%96%B4%EC%98%AC%EB%A0%A4-%EC%A3%BC%EB%8A%94%E3%80%8E%EC%8A%AC%EA%B8%B0%EB%A1%9C%EC%9A%B4-%ED%8C%8C%EC%9D%B4%EC%8D%AC/">
     <img src="https://user-images.githubusercontent.com/13811604/71542852-e5857b00-29ae-11ea-8eac-c0bc7ed95713.png" width="300" alt="book image">
   </a>
@@ -81,7 +81,7 @@ tags: [python, book]
 
 ### 파이썬 핵심 개발자들과의 인터뷰
 
-<figure>
+<figure style="text-align: center;">
   <a href="http://www.yes24.com/Product/Goods/67340568">
     <img src="https://user-images.githubusercontent.com/13811604/71542883-372e0580-29af-11ea-998e-6fb58c861afd.png" width="300" alt="book image">
   </a>
@@ -98,7 +98,7 @@ tags: [python, book]
 
 ### 파이썬 인 프랙티스
 
-<figure>
+<figure style="text-align: center;">
   <a href="https://wikibook.co.kr/python-in-practice/">
     <img src="https://user-images.githubusercontent.com/13811604/71542837-bb33bd80-29ae-11ea-97bb-a2aea5dbf56b.png" width="300" alt="book image">
   </a>
@@ -115,7 +115,7 @@ tags: [python, book]
 
 ### 실전 파이썬 프로그래밍
 
-<figure>
+<figure style="text-align: center;">
   <a href="https://blog.insightbook.co.kr/2014/12/08/%ed%8c%8c%ec%9d%b4%ec%8d%ac-%eb%82%b4%ea%b3%b5-%ec%83%81%ec%8a%b9-%eb%b9%84%eb%b2%95%ec%84%9c-%e3%80%8e%ec%8b%a4%ec%a0%84-%ed%8c%8c%ec%9d%b4%ec%8d%ac-%ed%94%84%eb%a1%9c%ea%b7%b8%eb%9e%98%eb%b0%8d/">
     <img src="https://user-images.githubusercontent.com/13811604/71542847-d8688c00-29ae-11ea-99ed-71a1a98b7d67.png" width="300" alt="book image">
   </a>
@@ -132,7 +132,7 @@ tags: [python, book]
 
 ### 파이썬 클린코드
 
-<figure>
+<figure style="text-align: center;">
   <a href="http://www.yes24.com/Product/Goods/69064790">
     <img src="https://user-images.githubusercontent.com/13811604/71542891-4745e500-29af-11ea-9af2-30dce97a7188.png" width="300" alt="book image">
   </a>
@@ -149,7 +149,7 @@ tags: [python, book]
 
 ### 실전 스케일링 파이썬 프로그래밍
 
-<figure>
+<figure style="text-align: center;">
   <a href="https://blog.insightbook.co.kr/2018/08/22/%ED%8C%8C%EC%9D%B4%EC%8D%AC%EA%B3%BC-%ED%95%A8%EA%BB%98%ED%95%98%EB%8A%94-%ED%99%95%EC%9E%A5%EA%B3%BC-%EB%B6%84%EC%82%B0-%E3%80%8E%EC%8B%A4%EC%A0%84-%EC%8A%A4%EC%BC%80%EC%9D%BC%EB%A7%81-%ED%8C%8C/">
     <img src="https://user-images.githubusercontent.com/13811604/71542856-f46c2d80-29ae-11ea-99cc-cfa8b26b4e74.png" width="300" alt="book image">
   </a>
@@ -165,7 +165,7 @@ tags: [python, book]
 
 ### 전문가를 위한 파이썬
 
-<figure>
+<figure style="text-align: center;">
   <a href="http://www.hanbit.co.kr/store/books/look.php?p_code=B3316273713">
     <img src="https://user-images.githubusercontent.com/13811604/71542830-a1927600-29ae-11ea-8eae-dda1f818cf27.png" width="300" alt="book image">
   </a>
